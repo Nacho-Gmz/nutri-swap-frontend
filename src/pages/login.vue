@@ -14,19 +14,3 @@ const toggleForm = () => {
     <RegisterCard v-else @switch="toggleForm"></RegisterCard>
   </v-sheet>
 </template>
-<style scoped>
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.fade-slide-enter-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.fade-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-</style>
