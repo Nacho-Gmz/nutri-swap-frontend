@@ -112,7 +112,7 @@ const sendResetLink = () => {
     >
       <v-card-title>Recuperación de contraseña</v-card-title>
       <v-card-text>
-        Ingresa tu correo para recibir un enlace de reestablecimiento de
+        Ingresa tu correo para enviarte un enlace de reestablecimiento de
         contraseña.
         <v-text-field
           validate-on="submit lazy"
