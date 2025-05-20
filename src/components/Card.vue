@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const props = defineProps({
-  color: String,
+defineProps({
+  color: { type: String, default: "primaryContainer" },
   variant: {
     type: String as () =>
       | "elevated"
@@ -30,7 +30,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <v-card :color="color" :variant="variant" class="pa-4 rounded-xl">
+  <v-card
+    :color="color"
+    :variant="variant"
+    class="pa-4 rounded-xl"
+  >
     <v-card-item>
       <v-card-title class="font-weight-bold text-on-primaryContainer text-wrap">
         {{ titleText }}

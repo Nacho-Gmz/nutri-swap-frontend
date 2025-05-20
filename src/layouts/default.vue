@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Sidebar from "@/components/Sidebar.vue";
+import Sidebar from "@/components/layout/Sidebar.vue";
 //
 </script>
 <template>
   <v-navigation-drawer permanent>
-    <Sidebar></Sidebar>
+    <Sidebar />
   </v-navigation-drawer>
   <v-main>
     <router-view />

@@ -5,7 +5,10 @@
 
   <!-- Swap information -->
   <!-- Make sure to add a button to save the swap if the user is logged in -->
-  <Card color="primaryContainer" title-text="Swapper"></Card>
+  <Card
+    color="primaryContainer"
+    title-text="Swapper"
+  />
 </template>
 
 <script lang="ts" setup>

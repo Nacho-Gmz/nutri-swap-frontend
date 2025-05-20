@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from "vue";
 
 const items = ref([]);
@@ -23,7 +23,7 @@ onMounted(fetchFoodNames);
     label="Alimento"
     variant="outlined"
     :items="items"
-  ></v-combobox>
+  />
   <v-btn
     rounded
     class="text-none"

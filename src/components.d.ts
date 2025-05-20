@@ -7,13 +7,13 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AppBar: typeof import('./components/layout/AppBar.vue')['default']
     Card: typeof import('./components/Card.vue')['default']
-    LoginCard: typeof import('./components/LoginCard.vue')['default']
     Navigation: typeof import('./components/Sidebar.vue')['default']
-    RegisterCard: typeof import('./components/RegisterCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Sidebar: typeof import('./components/Sidebar.vue')['default']
+    Sidebar: typeof import('./components/layout/Sidebar.vue')['default']
     Swapbar: typeof import('./components/Swapbar.vue')['default']
+    ThemeToggler: typeof import('./components/layout/ThemeToggler.vue')['default']
   }
 }

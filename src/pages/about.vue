@@ -1,5 +1,8 @@
 <template>
-  <Card color="primaryContainer" title-text="Acerca"></Card>
+  <Card
+    color="primaryContainer"
+    title-text="Acerca"
+  />
 </template>
 
 <script lang="ts" setup>
