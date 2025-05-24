@@ -42,12 +42,13 @@ const submit = () => {
         style="max-height: 100vh; overflow-y: auto"
       >
         <v-responsive>
-          <div class="text-h4 text-center font-weight-bold mb-2">NutriSwap</div>
+          <div class="text-h2 text-center text-info font-weight-bold mb-2">
+            NutriSwap
+          </div>
           <v-card
             color="infoContainer"
             variant="elevated"
             class="pa-4 rounded-xl"
-            min-width="600"
           >
             <v-card-item class="text-center">
               <v-card-title

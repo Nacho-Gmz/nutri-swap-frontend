@@ -1,12 +1,24 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useUserStore } from "@/stores/user";
 
-const items = ref([
-  { title: "Inicio", icon: "mdi-home", route: "/" },
-  { title: "Intercambio", icon: "mdi-swap-horizontal", route: "/swap" },
-  { title: "Acerca de", icon: "mdi-information", route: "/about" },
-  { title: "Iniciar sesión", icon: "mdi-account", route: "/login" },
-]);
+const userStore = useUserStore();
+
+const items = computed(() =>
+  userStore.isLoggedIn
+    ? [
+        { title: "Inicio", icon: "mdi-home", route: "/" },
+        { title: "Intercambio", icon: "mdi-swap-horizontal", route: "/swap" },
+        { title: "Acerca de", icon: "mdi-information", route: "/about" },
+        { title: "Cerrar sesión", icon: "mdi-logout", route: "/logout" },
+      ]
+    : [
+        { title: "Inicio", icon: "mdi-home", route: "/" },
+        { title: "Intercambio", icon: "mdi-swap-horizontal", route: "/swap" },
+        { title: "Acerca de", icon: "mdi-information", route: "/about" },
+        { title: "Iniciar sesión", icon: "mdi-account", to: "/login" },
+      ]
+);
 </script>
 
 <template>

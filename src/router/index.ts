@@ -33,4 +33,17 @@ router.isReady().then(() => {
   localStorage.removeItem("vuetify:dynamic-reload");
 });
 
+// Ejemplo de rutas protegidas por nombre
+const protectedRouteNames = ["/dashboard", "/profile"]; // Cambia por los nombres de tus rutas
+
+router.beforeEach((to, from) => {
+  const isAuthenticated = !!localStorage.getItem("token"); // Cambia por tu lógica real
+
+  if (protectedRouteNames.includes(to.name as string) && !isAuthenticated) {
+    return "/login"; // Redirige a login si no está autenticado
+  } else {
+    return true;
+  }
+});
+
 export default router;

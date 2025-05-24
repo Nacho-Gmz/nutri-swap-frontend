@@ -4,7 +4,7 @@
     class="food-bg bg-background ma-0 pa-4 w-100 h-100 overflow-hidden"
     fluid
   >
-    <ThemeToggler />
+    <ThemeToggler class="position-absolute" />
     <router-view />
   </v-container>
 </template>

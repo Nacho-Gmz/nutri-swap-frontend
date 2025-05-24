@@ -1,3 +1,4 @@
+import { useUserStore } from "@/stores/user";
 import type {
   ChangePassword,
   LogInCredentials,
@@ -6,22 +7,22 @@ import type {
 import axios from "axios";
 
 const authClient = axios.create({
-  baseURL: `${import.meta.env.BASE_URL}/auth`,
+  baseURL: `${import.meta.env.VITE_API_URL}/auth`,
   timeout: 10000,
 });
 
-export async function logIn(credentials: LogInCredentials) {
+export async function login(credentials: LogInCredentials) {
   try {
-    const { data } = await authClient.post(`/log-in`, credentials);
+    const { data } = await authClient.post(`/login`, credentials);
     return [null, data];
   } catch (error) {
     return [error];
   }
 }
 
-export async function signIn(credentials: SignInCredentials) {
+export async function signup(credentials: SignInCredentials) {
   try {
-    const { data } = await authClient.post(`/sign-in`, credentials);
+    const { data } = await authClient.post(`/signup`, credentials);
     return [null, data];
   } catch (error) {
     return [error];
@@ -37,4 +38,7 @@ export async function changePassword(password: ChangePassword) {
   }
 }
 
-export async function logOut() {}
+export async function logOut() {
+  const user = useUserStore();
+  user.logOut();
+}

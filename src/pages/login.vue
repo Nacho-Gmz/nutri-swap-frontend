@@ -1,11 +1,18 @@
 <script lang="ts" setup>
-const form = ref<HTMLFormElement | null>(null);
+import router from "@/router";
+import { login } from "@/services/api/authService";
+import { useSnackbarStore } from "@/stores/snackbar";
+import { useUserStore } from "@/stores/user";
+
+const snackbar = useSnackbarStore();
+
 const valid = ref<boolean>(false);
 const email = ref<string>("");
 const password = ref<string>("");
 const show = ref<boolean>(false);
 const showModal = ref<boolean>(false);
 const c_email = ref<string>("");
+const user = useUserStore();
 
 const emailRules = [
   (v: string) => !!v || "El campo es requerido",
@@ -14,9 +21,20 @@ const emailRules = [
 
 const passwordRules = [(v: string) => !!v || "El campo es requerido"];
 
-const submit = () => {
-  if (form.value?.validate()) {
-    alert(`Logging in with Email: ${email.value}`);
+const submit = async () => {
+  if (valid.value) {
+    const credentials = {
+      correo: email.value,
+      contraseña: password.value,
+    };
+    const [error, data] = await login(credentials);
+    if (error) {
+      snackbar.showSnackbar("Error al iniciar sesión", "error");
+    } else {
+      user.logIn();
+      snackbar.showSnackbar("Inicio de sesión exitoso", "success");
+      router.push("/dashboard");
+    }
   }
 };
 
@@ -34,17 +52,21 @@ const sendResetLink = () => {
         style="max-height: 100vh; overflow-y: auto"
       >
         <v-responsive>
-          <div class="text-h4 text-center font-weight-bold mb-2">NutriSwap</div>
+          <v-sheet
+            class="text-h2 rounded-xl font-weight-bold text-center mb-2 text-primary"
+            color="transparent"
+            >NutriSwap</v-sheet
+          >
           <v-card
             color="primaryContainer"
             variant="elevated"
             class="pa-4 rounded-xl"
           >
-            <div class="text-h6 font-weight-regular text-center mb-4">
+            <div class="text-h4 font-weight-bold text-center mb-4">
               Inicia sesión
             </div>
 
-            <v-form ref="form" v-model="valid" validate-on="submit lazy">
+            <v-form v-model="valid" validate-on="submit lazy" @submit.prevent>
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
