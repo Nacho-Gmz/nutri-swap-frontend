@@ -6,6 +6,15 @@ const foodClient = axios.create({
   timeout: 10000,
 });
 
+export async function getNombreAlimentos() {
+  try {
+    const { data } = await foodClient.get(`/nombres`);
+    return [null, data];
+  } catch (error) {
+    return [error];
+  }
+}
+
 export async function getAlimentoById(alimentoId: number) {
   try {
     const { data } = await foodClient.get(`/alimento/${alimentoId}`);

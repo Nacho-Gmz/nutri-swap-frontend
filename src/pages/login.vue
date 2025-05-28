@@ -62,6 +62,9 @@ const sendResetLink = () => {
             variant="elevated"
             class="pa-4 rounded-xl"
           >
+            <v-btn class="position-absolute" icon rounded="xl" to="/">
+              <v-icon icon="mdi-home" color="primary" />
+            </v-btn>
             <div class="text-h4 font-weight-bold text-center mb-4">
               Inicia sesión
             </div>

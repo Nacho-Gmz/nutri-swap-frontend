@@ -8,6 +8,7 @@
 import { createRouter, createWebHistory } from "vue-router/auto";
 import { setupLayouts } from "virtual:generated-layouts";
 import { routes } from "vue-router/auto-routes";
+import { useUserStore } from "@/stores/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,11 +34,11 @@ router.isReady().then(() => {
   localStorage.removeItem("vuetify:dynamic-reload");
 });
 
-// Ejemplo de rutas protegidas por nombre
-const protectedRouteNames = ["/dashboard", "/profile"]; // Cambia por los nombres de tus rutas
+const protectedRouteNames = ["dashboard", "profile"];
 
 router.beforeEach((to, from) => {
-  const isAuthenticated = !!localStorage.getItem("token"); // Cambia por tu lógica real
+  const user = useUserStore();
+  const isAuthenticated = user.isLoggedIn;
 
   if (protectedRouteNames.includes(to.name as string) && !isAuthenticated) {
     return "/login"; // Redirige a login si no está autenticado

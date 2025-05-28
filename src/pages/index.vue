@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col>
+  <v-row class="align-center justify-center">
+    <v-col lg="6" cols="12" class="d-flex justify-center">
       <Card
         title-text="¡Intercambia, disfruta y come lo que te gusta!"
         description-text="Intercambiar un alimento por otro nunca había sido tan sencillo. En NutriSwap te damos las mejores opciones para que sigas disfrutando de tus comidas sin complicarte, eligiendo lo que más te guste sin perder nutrientes. Solo elige, intercambia y mantén el equilibrio en tu alimentación de forma sencilla y práctica."
@@ -15,11 +15,9 @@
         color="primaryContainer"
       />
     </v-col>
-    <v-col />
   </v-row>
-  <v-row>
-    <v-col />
-    <v-col>
+  <v-row class="align-center justify-center">
+    <v-col lg="6" cols="12" class="d-flex justify-center">
       <Card
         color="primaryContainer"
         title-text="Te brindamos la alternativa más similar al alimento que quieres sustituir"
@@ -31,19 +29,17 @@
       />
     </v-col>
   </v-row>
-  <v-row>
-    <v-col>
+  <v-row class="align-center justify-center">
+    <v-col lg="6" cols="12" class="d-flex justify-center">
       <Card
         color="primaryContainer"
         title-text="La clave para una alimentación equilibrada"
         description-text="Una porción es la cantidad específica de un alimento que se recomienda consumir. Su tamaño varía según el tipo de alimento y las necesidades nutricionales de cada persona."
       />
     </v-col>
-    <v-col />
   </v-row>
-  <v-row>
-    <v-col />
-    <v-col>
+  <v-row class="align-center justify-center">
+    <v-col lg="6" cols="12" class="d-flex justify-center">
       <Card
         color="primaryContainer"
         title-text="Flexibilidad sin perder el equilibrio nutricional"

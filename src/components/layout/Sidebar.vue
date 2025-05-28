@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
 
 const userStore = useUserStore();
@@ -10,13 +10,12 @@ const items = computed(() =>
         { title: "Inicio", icon: "mdi-home", route: "/" },
         { title: "Intercambio", icon: "mdi-swap-horizontal", route: "/swap" },
         { title: "Acerca de", icon: "mdi-information", route: "/about" },
-        { title: "Cerrar sesión", icon: "mdi-logout", route: "/logout" },
       ]
     : [
         { title: "Inicio", icon: "mdi-home", route: "/" },
         { title: "Intercambio", icon: "mdi-swap-horizontal", route: "/swap" },
         { title: "Acerca de", icon: "mdi-information", route: "/about" },
-        { title: "Iniciar sesión", icon: "mdi-account", to: "/login" },
+        { title: "Iniciar sesión", icon: "mdi-account", route: "/login" },
       ]
 );
 </script>
@@ -34,6 +33,17 @@ const items = computed(() =>
         class="button"
         color="primary"
         rounded="xl"
+      />
+      <v-list-item
+        v-if="userStore.isLoggedIn"
+        title="Cerrar sesión"
+        prepend-icon="mdi-logout"
+        to="/"
+        active-class="router-link-exact-active"
+        class="button"
+        color="primary"
+        rounded="xl"
+        @click="userStore.logOut()"
       />
     </v-list>
   </v-navigation-drawer>

@@ -50,13 +50,12 @@ const submit = () => {
             variant="elevated"
             class="pa-4 rounded-xl"
           >
-            <v-card-item class="text-center">
-              <v-card-title
-                class="font-weight-bold text-on-infoContainer text-wrap"
-              >
-                Regístrate
-              </v-card-title>
-            </v-card-item>
+            <v-btn class="position-absolute" icon rounded="xl" to="/">
+              <v-icon icon="mdi-home" color="info" />
+            </v-btn>
+            <div class="text-h4 font-weight-bold text-center mb-4">
+              Regístrate
+            </div>
 
             <v-form ref="form" v-model="valid" validate-on="submit lazy">
               <div class="d-flex ga-2">
