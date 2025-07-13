@@ -8,27 +8,32 @@ import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
   >
     <div class="flex grow flex-col items-center justify-between lg:flex-row lg:px-6">
       <div
-        class="flex w-full items-center justify-between gap-2 border-b border-gray-200 px-3 py-3 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4 dark:border-gray-800"
+        class="flex w-full items-center justify-between gap-2 px-3 py-3 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4"
       >
         <h1 class="block text-lg font-bold text-sky-600 dark:text-sky-300">NutriSwap</h1>
       </div>
 
       <div
-        class="flex w-full items-center justify-between gap-4 px-5 py-4 shadow-md lg:justify-end lg:px-0 lg:shadow-none"
+        class="flex w-full flex-wrap items-center justify-between gap-4 px-2 py-4 shadow-md lg:justify-end lg:px-0 lg:shadow-none"
       >
-        <div class="flex gap-2">
+        <div class="flex grow gap-2">
           <router-link
-            class="text-lg font-medium text-gray-800 hover:text-green-700 hover:underline dark:text-white/90 hover:dark:text-green-300"
-            to="/login"
-            >Conoce</router-link
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
+            to="/"
+            >Inicio</router-link
           >
           <router-link
-            class="text-lg font-medium text-gray-800 hover:text-green-700 hover:underline dark:text-white/90 hover:dark:text-green-300"
-            to="/login"
-            >Aprende</router-link
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
+            to="/about"
+            >Conócenos</router-link
           >
           <router-link
-            class="text-lg font-medium text-gray-800 hover:text-green-700 hover:underline dark:text-white/90 hover:dark:text-green-300"
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
+            to="/swapper"
+            >Intercambia</router-link
+          >
+          <router-link
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
             to="/login"
             >Accede</router-link
           >

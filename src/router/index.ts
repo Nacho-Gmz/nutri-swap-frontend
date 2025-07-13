@@ -40,13 +40,13 @@ const router = createRouter({
         {
           path: "/about",
           name: "about",
-          component: () => import("@/modules/landing/pages/LandingPage.vue"),
+          component: () => import("@/modules/landing/pages/AboutPage.vue"),
           meta: { requiresAuth: false },
         },
         {
           path: "/swapper",
           name: "swapper",
-          component: () => import("@/modules/landing/pages/LandingPage.vue"),
+          component: () => import("@/modules/landing/pages/SwapperPage.vue"),
           meta: { requiresAuth: false },
         },
       ],

@@ -31,7 +31,8 @@ const variantClasses = {
     "border-yellow-500 bg-yellow-500/50 shadow-sm hover:bg-yellow-400/50 disabled:bg-yellow-300",
   error: "border-red-500 bg-red-500/50 shadow-sm hover:bg-red-400/50 disabled:bg-red-300",
   info: "border-sky-500 bg-sky-500/50 shadow-sm hover:bg-sky-400/50 disabled:bg-sky-300",
-  outline: "border-white/50 hover:bg-white/30 disabled:bg-sky-300",
+  outline:
+    "border-white/30 hover:bg-white/30 disabled:bg-sky-300 dark:border-black/30 dark:hover:bg-black/20",
 };
 
 const onClick = () => {
@@ -44,7 +45,7 @@ const onClick = () => {
 <template>
   <button
     :class="[
-      'inline-flex items-center justify-center gap-2 rounded-lg border font-medium text-gray-700 backdrop-blur-3xl transition dark:text-gray-200',
+      'inline-flex items-center justify-center gap-2 rounded-lg border-2 font-medium text-gray-700 shadow-md backdrop-blur-3xl transition dark:text-gray-200',
       sizeClasses[size],
       variantClasses[variant],
       className,

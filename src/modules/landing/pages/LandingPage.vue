@@ -1,22 +1,14 @@
 <script setup lang="ts">
 import SimpleCard from "@/modules/common/components/SimpleCard.vue";
-import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
 </script>
 
 <template>
   <div class="flex flex-col gap-2">
-    <ButtonUI>Test</ButtonUI>
-    <ButtonUI variant="secondary">Test</ButtonUI>
-    <ButtonUI variant="success">Test</ButtonUI>
-    <ButtonUI variant="warning">Test</ButtonUI>
-    <ButtonUI variant="error">Test</ButtonUI>
-    <ButtonUI variant="info">Test</ButtonUI>
-    <ButtonUI variant="outline">Test</ButtonUI>
     <SimpleCard>
       <div>
-        <h4 class="mb-1 text-xl font-medium text-green-800 dark:text-green-200/90">
+        <h1 class="text-2xl font-bold text-sky-700 dark:text-sky-300">
           ¡Intercambia, disfruta y come lo que te gusta!
-        </h4>
+        </h1>
 
         <p class="text-md text-gray-700 dark:text-gray-200">
           Intercambiar un alimento por otro nunca había sido tan sencillo. En NutriSwap te damos las
@@ -28,9 +20,9 @@ import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
     </SimpleCard>
     <SimpleCard>
       <div>
-        <h4 class="mb-1 text-xl font-medium text-green-800 dark:text-green-200/90">
+        <h1 class="text-2xl font-bold text-sky-700 dark:text-sky-300">
           Te brindamos la alternativa más similar al alimento que quieres sustituir
-        </h4>
+        </h1>
 
         <p class="text-md text-gray-700 dark:text-gray-200">
           Utilizamos datos del Sistema Mexicano de Alimentos Equivalentes (SMAE) para encontrar la
@@ -42,9 +34,9 @@ import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
     </SimpleCard>
     <SimpleCard>
       <div>
-        <h4 class="mb-1 text-xl font-medium text-green-800 dark:text-green-200/90">
+        <h1 class="text-2xl font-bold text-sky-700 dark:text-sky-300">
           La clave para una alimentación equilibrada
-        </h4>
+        </h1>
 
         <p class="text-md text-gray-700 dark:text-gray-200">
           Una porción es la cantidad específica de un alimento que se recomienda consumir. Su tamaño
@@ -54,9 +46,9 @@ import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
     </SimpleCard>
     <SimpleCard>
       <div>
-        <h4 class="mb-1 text-xl font-medium text-green-800 dark:text-green-200/90">
+        <h1 class="text-2xl font-bold text-sky-700 dark:text-sky-300">
           Flexibilidad sin perder el equilibrio nutricional
-        </h4>
+        </h1>
 
         <p class="text-md text-gray-700 dark:text-gray-200">
           Conocer cómo intercambiar porciones te permite adaptar tu alimentación sin afectar tu
