@@ -17,67 +17,11 @@ body {
   background-position: center center;
 }
 
-@utility menu-item {
-  @apply relative flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium;
-}
-
-@utility menu-item-active {
-  @apply bg-sky-50 text-sky-500 dark:bg-sky-500/[0.12] dark:text-sky-400;
-}
-
-@utility menu-item-inactive {
-  @apply text-gray-700 group-hover:text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
-}
-
-@utility menu-item-icon {
-  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400;
-}
-
-@utility menu-item-icon-active {
-  @apply text-sky-500 dark:text-sky-400;
-}
-
-@utility menu-item-icon-inactive {
-  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
-}
-
-@utility menu-item-arrow {
-  @apply relative;
-}
-
-@utility menu-item-arrow-active {
-  @apply rotate-180 text-sky-500 dark:text-sky-400;
-}
-
-@utility menu-item-arrow-inactive {
-  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
-}
-
-@utility menu-dropdown-item {
-  @apply relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium;
-}
-
-@utility menu-dropdown-item-active {
-  @apply bg-sky-50 text-sky-500 dark:bg-sky-500/[0.12] dark:text-sky-400;
-}
-
-@utility menu-dropdown-item-inactive {
-  @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5;
-}
-
-@utility menu-dropdown-badge {
-  @apply block rounded-full px-2.5 py-0.5 text-xs font-medium text-sky-500 uppercase dark:text-sky-400;
-}
-
-@utility menu-dropdown-badge-active {
-  @apply bg-sky-100 dark:bg-sky-500/20;
-}
-
-@utility menu-dropdown-badge-inactive {
-  @apply bg-sky-50 group-hover:bg-sky-100 dark:bg-sky-500/15 dark:group-hover:bg-sky-500/20;
-}
-
 .input {
+  @apply h-11 w-full rounded-lg border border-gray-300/50 bg-white/30 px-4 py-2.5 text-sm text-gray-800 shadow-md placeholder:text-gray-700/50 focus:border-sky-300 focus:ring-3 focus:ring-sky-500/10 focus:outline-hidden dark:bg-black/30 dark:text-white/90 dark:placeholder:text-white/50;
+}
+
+.combobox {
   @apply h-11 w-full rounded-lg border border-gray-300/50 bg-white/30 px-4 py-2.5 text-sm text-gray-800 shadow-md placeholder:text-gray-700/50 focus:border-sky-300 focus:ring-3 focus:ring-sky-500/10 focus:outline-hidden dark:bg-black/30 dark:text-white/90 dark:placeholder:text-white/50;
 }
 
