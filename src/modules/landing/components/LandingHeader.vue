@@ -19,7 +19,7 @@ import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
         <div class="flex grow gap-2">
           <router-link
             class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
-            to="/"
+            to="/landing"
             >Inicio</router-link
           >
           <router-link

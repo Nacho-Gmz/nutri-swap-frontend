@@ -1,18 +1,16 @@
-interface LoginCredentials {
+export interface LoginCredentials {
   email: string;
   password: string;
 }
 
-interface RegisterCredentials {
+export interface RegisterCredentials {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
 }
 
-interface ChangePassword {
+export interface ChangePassword {
   originalPassword: string;
   newPassword: string;
 }
-
-export type { LoginCredentials, RegisterCredentials, ChangePassword };

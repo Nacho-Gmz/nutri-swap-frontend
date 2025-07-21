@@ -92,3 +92,7 @@ body {
 .link {
   @apply font-bold text-sky-600 hover:text-sky-800 hover:underline dark:text-sky-300 dark:hover:text-sky-400;
 }
+
+.router-link-exact-active {
+  @apply bg-green-300/50 text-green-600 dark:bg-green-700/50 dark:text-green-400;
+}

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useUserStore } from "@/modules/auth/stores/userStore";
-const user = useUserStore();
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
+const user = useAuthStore();
 </script>
 
 <template>

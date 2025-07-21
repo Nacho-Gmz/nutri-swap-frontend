@@ -1,5 +1,5 @@
-import AuthLayout from "@/modules/auth/layouts/AuthLayout.vue";
-import { useUserStore } from "@/modules/auth/stores/userStore";
+import { authRoutes } from "@/modules/auth/routes";
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
 import NotFound from "@/modules/common/pages/NotFound.vue";
 import DashboardLayout from "@/modules/dashboard/layouts/DashboardLayout.vue";
 import LandingLayout from "@/modules/landing/layouts/LandingLayout.vue";
@@ -8,31 +8,14 @@ import { createRouter, createWebHistory } from "vue-router";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: "/auth",
-      redirect: "/login",
-      component: AuthLayout,
-      children: [
-        {
-          path: "/login",
-          name: "login",
-          component: () => import("@/modules/auth/pages/LoginPage.vue"),
-          meta: { requiresAuth: false },
-        },
-        {
-          path: "/register",
-          name: "register",
-          component: () => import("@/modules/auth/pages/RegisterPage.vue"),
-          meta: { requiresAuth: false },
-        },
-      ],
-    },
+    authRoutes,
     {
       path: "/",
+      redirect: "/landing",
       component: LandingLayout,
       children: [
         {
-          path: "/",
+          path: "/landing",
           name: "homepage",
           component: () => import("@/modules/landing/pages/LandingPage.vue"),
           meta: { requiresAuth: false },
@@ -52,9 +35,8 @@ const router = createRouter({
       ],
     },
     {
-      path: "/dashboard",
-      redirect: "/dashboard",
-      name: "user home",
+      path: "/home",
+      redirect: { name: "dashboard" },
       component: DashboardLayout,
       children: [
         {
@@ -85,18 +67,18 @@ const router = createRouter({
   ],
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-router.beforeEach((to, from) => {
-  const user = useUserStore();
-  const userAuthenticated = user.isLoggedIn;
+// router.beforeEach((to, from) => {
+//   const user = useAuthStore();
+//   // const userAuthenticated = user.isLoggedIn;
+//   const userAuthenticated = false;
 
-  if (to.meta.requiresAuth && !userAuthenticated) {
-    return { name: "login" };
-  }
-  if (to.name === "login" && userAuthenticated) {
-    return { name: "dashboard" };
-  }
+//   if (to.meta.requiresAuth && !userAuthenticated) {
+//     return { name: "login" };
+//   }
+//   if (to.name === "login" && userAuthenticated) {
+//     return { name: "dashboard" };
+//   }
 
-  return true;
-});
+//   return true;
+// });
 export default router;

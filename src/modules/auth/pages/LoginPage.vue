@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
-import { useAuth } from "../composables/useAuth";
 import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
+import { useLogin } from "../composables/useLogin";
 
-const { email, password, showPassword, togglePasswordVisibility, handleLogin } = useAuth();
+const { email, password, showPassword, togglePasswordVisibility, onLogin } = useLogin();
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const { email, password, showPassword, togglePasswordVisibility, handleLogin } =
           <ThemeToggler />
         </div>
         <div>
-          <form @submit.prevent="handleLogin">
+          <form @submit.prevent="onLogin">
             <div class="space-y-5">
               <!-- Email -->
               <div>

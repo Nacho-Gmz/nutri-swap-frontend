@@ -1,54 +1,18 @@
 <script setup lang="ts">
 import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
-import { showToast } from "@/modules/common/composables/useToast";
-import { ref } from "vue";
-import { register } from "@/modules/auth/services/authService";
-import router from "@/router";
 import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
+import { useRegister } from "../composables/useRegister";
 
-const firstName = ref("");
-const lastName = ref("");
-const email = ref("");
-const password = ref("");
-const showPassword = ref(false);
-const agreeToTerms = ref(false);
-
-const togglePasswordVisibility = () => {
-  showPassword.value = !showPassword.value;
-};
-
-const handleSubmit = async () => {
-  if (!firstName.value || !lastName.value || !email.value || !password.value) {
-    showToast("Campos vacios", "warning");
-    return;
-  }
-
-  if (!/.+@.+\..+/.test(email.value)) {
-    showToast("Correo no válido", "error");
-    return;
-  }
-
-  if (!agreeToTerms.value) {
-    showToast("Es necesario que aceptes los términos y condiciones", "error");
-    return;
-  }
-
-  const credentials = {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    email: email.value,
-    password: password.value,
-  };
-
-  const [error, data] = await register(credentials);
-
-  if (error) {
-    showToast(error, "error");
-  } else {
-    showToast("¡Registrado exitosamente!", "success");
-    router.push("/login");
-  }
-};
+const {
+  firstName,
+  lastName,
+  email,
+  password,
+  agreeToTerms,
+  showPassword,
+  togglePasswordVisibility,
+  onRegister,
+} = useRegister();
 </script>
 
 <template>
@@ -61,7 +25,7 @@ const handleSubmit = async () => {
         <ThemeToggler />
       </div>
       <div>
-        <form @submit.prevent>
+        <form @submit.prevent="onRegister">
           <div class="space-y-5">
             <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <!-- First Name -->
@@ -170,11 +134,7 @@ const handleSubmit = async () => {
             </div>
             <!-- Button -->
             <div>
-              <ButtonUI
-                start-icon="bx-user-plus"
-                size="sm"
-                class-name="w-full"
-                @click="handleSubmit"
+              <ButtonUI start-icon="bx-user-plus" size="sm" class-name="w-full"
                 >Crea tu cuenta</ButtonUI
               >
             </div>
