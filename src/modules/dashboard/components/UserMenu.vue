@@ -7,7 +7,7 @@ import router from "@/router";
 const dropdownOpen = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 
-const authStore = useAuthStore();
+const { user, logout } = useAuthStore();
 
 const menuItems = [
   { href: "/profile", icon: "bx-user", text: "Perfil" },
@@ -23,7 +23,7 @@ const closeDropdown = () => {
 };
 
 const signOut = () => {
-  authStore.logout();
+  logout();
   router.push({ name: "landing" });
 };
 
@@ -48,7 +48,7 @@ onUnmounted(() => {
       class="flex items-center text-green-600 dark:text-green-400"
       @click.prevent="toggleDropdown"
     >
-      <span class="text-md mr-1 block font-medium">{{ authStore.user?.email }}</span>
+      <span class="text-md mr-1 block font-medium">{{ user?.email }}</span>
 
       <i class="bx bx-chevron-down text-2xl" :class="{ 'rotate-180': dropdownOpen }"></i>
     </button>
@@ -59,7 +59,7 @@ onUnmounted(() => {
       class="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border-2 border-green-200 bg-white/50 p-3 shadow-lg backdrop-blur-3xl dark:border-green-800 dark:bg-gray-900/10"
     >
       <div class="text-green-600 dark:text-green-400">
-        {{ authStore.user?.email }}
+        {{ user?.email }}
       </div>
 
       <ul class="flex flex-col gap-1 border-b border-green-300 pt-4 pb-3 dark:border-green-800">

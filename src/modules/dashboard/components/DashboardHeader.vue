@@ -29,20 +29,21 @@ const toggleApplicationMenu = () => {
   >
     <div class="flex grow flex-col items-center justify-between lg:flex-row lg:px-6">
       <div
-        class="flex w-full items-center justify-between gap-2 px-3 py-3 sm:gap-4 lg:justify-normal lg:px-0 lg:py-4"
+        class="flex w-full items-center justify-between gap-2 px-3 py-3 sm:gap-4 lg:justify-normal lg:border-b-0 lg:px-0 lg:py-4"
       >
-        <button
-          @click="handleToggle"
-          class="relative flex h-11 w-11 items-center justify-center rounded-xl border-2 border-green-400/25 bg-green-50/30 text-green-400 shadow-md backdrop-blur-md transition-colors hover:bg-green-100/75 dark:border-green-500/50 dark:bg-green-800/30 dark:text-green-500 dark:hover:bg-green-800/50"
-        >
-          <i class="bx bx-menu text-2xl"></i>
-        </button>
-        <button
-          @click="toggleApplicationMenu"
-          class="z-99999 flex h-10 w-10 items-center justify-center rounded-lg text-green-500 hover:bg-green-100 lg:hidden dark:text-green-400 dark:hover:bg-gray-800"
-        >
-          <i class="bx bx-dots-horizontal-rounded text-2xl"></i>
-        </button>
+        <h1 class="block text-lg font-bold text-sky-600 dark:text-sky-300">NutriSwap +</h1>
+        <div class="flex grow gap-2">
+          <router-link
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
+            to="/dashboard"
+            >Tablero</router-link
+          >
+          <router-link
+            class="inline-flex w-1/4 items-center justify-center gap-2 rounded-lg border-2 border-white/50 p-2 text-lg font-medium text-gray-700 shadow-md backdrop-blur-3xl transition hover:bg-white/30 hover:text-green-700 disabled:bg-sky-300 dark:border-black/20 dark:text-gray-200 dark:hover:bg-black/20 hover:dark:text-green-300"
+            to="/user-swapper"
+            >Intercambios</router-link
+          >
+        </div>
       </div>
 
       <div
