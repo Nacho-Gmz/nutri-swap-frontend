@@ -1,6 +1,7 @@
-import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import { type RegisterCredentials } from "../interfaces";
 import { isAxiosError } from "axios";
+
+import { nutriSwapAPI } from "@/api/nutriSwapAPI";
+import type { RegisterCredentials } from "../types";
 
 interface RegisterError {
   ok: false;
@@ -26,7 +27,7 @@ export const registerAction = async (
     if (isAxiosError(error)) {
       return { ok: false, message: error.response?.data.detail ?? "Error desconocido en registro" };
     }
-    console.log(error);
-    throw new Error("No fue posible realizar la petición de registro");
+
+    throw new Error("No fue posible realizar la petición de registro: " + String(error));
   }
 };

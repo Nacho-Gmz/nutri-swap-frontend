@@ -1,17 +1,36 @@
-import { nutriSwapAPI } from "@/api/nutriSwapAPI";
 import { isAxiosError } from "axios";
 
-export const swapFoodAction = async (originalId: number) => {
-  try {
-    const { data } = await nutriSwapAPI.post(`/alimentos/ia/${originalId}`);
+import { nutriSwapAPI } from "@/api/nutriSwapAPI";
+import type { Swap } from "../types";
 
-    return data;
+interface SwapFoodError {
+  ok: false;
+  message: string;
+}
+
+interface SwapFoodSuccess {
+  ok: true;
+  swaps: Swap[];
+}
+
+export const swapFoodAction = async (
+  originalId: number,
+): Promise<SwapFoodError | SwapFoodSuccess> => {
+  try {
+    const { data } = await nutriSwapAPI.get(`/alimentos/ia/${originalId}`);
+
+    return {
+      ok: true,
+      swaps: data,
+    };
   } catch (error) {
     if (isAxiosError(error)) {
-      return error.response?.data.detail ?? "Error desconocido al intercambiar un alimento";
+      return {
+        ok: false,
+        message: error.response?.data.detail ?? "Error desconocido al intercambiar un alimento",
+      };
     }
 
-    console.log(error);
-    throw new Error("No fue posible realizar la petición de intercambio");
+    throw new Error("No fue posible realizar la petición de intercambio: " + String(error));
   }
 };

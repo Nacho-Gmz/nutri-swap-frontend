@@ -1,13 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, watch, defineEmits } from "vue";
 import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption } from "@headlessui/vue";
 import { getFoodsNamesAction } from "../actions/get-foods-names.action";
 
+const emit = defineEmits<{ (e: "select", id: number): void }>();
 const foods = ref<{ id: number; name: string }[]>([]);
 const selectedFood = ref<{ id: number; name: string }>({ id: NaN, name: "" });
 const query = ref("");
 const debouncedQuery = ref("");
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
+watch(selectedFood, (newVal) => {
+  if (newVal && !isNaN(newVal.id)) {
+    emit("select", newVal.id);
+  }
+});
 
 const filteredFood = computed(() => {
   const q = debouncedQuery.value.trim().toLowerCase();
@@ -22,8 +29,11 @@ watch(query, (newVal) => {
     debouncedQuery.value = newVal;
   }, 200); // 200ms debounce
 });
+
 onMounted(async () => {
-  foods.value = await getFoodsNamesAction();
+  const foodNamesResponse = await getFoodsNamesAction();
+  if (!foodNamesResponse.ok) return;
+  foods.value = foodNamesResponse.foodNames;
 });
 </script>
 
@@ -35,7 +45,12 @@ onMounted(async () => {
       >
         <ComboboxInput
           class="input relative w-full cursor-default overflow-hidden rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
-          :displayValue="(food) => food.name"
+          :displayValue="
+            (food) =>
+              food && typeof food === 'object' && 'name' in food
+                ? (food as { name: string }).name
+                : ''
+          "
           @input="query = $event.target.value"
         />
       </div>
@@ -72,7 +87,7 @@ onMounted(async () => {
               class="absolute inset-y-0 left-0 flex items-center pl-3"
               :class="{ 'text-white': active, 'text-green-600': !active }"
             >
-              <CheckIcon class="h-5 w-5" aria-hidden="true" />
+              <i class="bx bx-check"></i>
             </span>
           </li>
         </ComboboxOption>

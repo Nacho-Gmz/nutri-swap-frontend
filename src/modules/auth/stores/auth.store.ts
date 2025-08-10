@@ -1,8 +1,10 @@
-import { defineStore } from "pinia";
 import { ref } from "vue";
-import { loginAction, registerAction } from "../actions";
-import type { User } from "../interfaces";
+
+import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
+
+import { loginAction, registerAction } from "../actions";
+import type { User } from "../types";
 
 export const useAuthStore = defineStore("auth", () => {
   const isLoggedIn = ref<boolean>(false);
