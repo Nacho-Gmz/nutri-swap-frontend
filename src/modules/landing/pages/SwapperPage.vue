@@ -6,10 +6,12 @@ import FoodCard from "@/modules/common/components/FoodCard.vue";
 import { useToasts } from "@/modules/common/composables/useToast";
 import { getFoodInformationAction, swapFoodAction } from "@/modules/common/actions";
 import type { Alimento, Swap } from "@/modules/common/types";
+import RegisterModal from "../components/RegisterModal.vue";
 
 const selectedFoodId = ref<number | null>(null);
 const selectedFoodInfo = ref<Alimento | null>(null);
 const possibleSwaps = ref<Swap[] | null>(null);
+const isModalOpen = ref<boolean>(false);
 
 function handleFoodSelect(id: number) {
   selectedFoodId.value = id;
@@ -31,8 +33,10 @@ const handleSwap = async () => {
 
   selectedFoodInfo.value = originalFoodInfoResponse.foodInfo;
   possibleSwaps.value = swapFoodResponse.swaps;
-  console.log(selectedFoodInfo.value);
-  console.log(possibleSwaps.value);
+};
+
+const attemptSwap = async () => {
+  isModalOpen.value = true;
 };
 </script>
 
@@ -57,8 +61,10 @@ const handleSwap = async () => {
           :key="swap.alimento.id"
           :intercambio="swap"
           :compare-with="selectedFoodInfo"
+          :action="attemptSwap"
         />
       </div>
     </SimpleCard>
+    <RegisterModal v-if="isModalOpen" @close="isModalOpen = false"></RegisterModal>
   </div>
 </template>

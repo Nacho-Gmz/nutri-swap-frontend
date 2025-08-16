@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { Alimento, Swap } from "../types/alimentos.interface";
+import ButtonUI from "./ui/ButtonUI.vue";
 
-const props = defineProps<{ intercambio: Swap; compareWith: Alimento | null }>();
+const props = defineProps<{
+  intercambio: Swap;
+  compareWith: Alimento | null;
+  action?: () => void;
+}>();
 
 function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") {
   if (!props.compareWith) return "";
@@ -45,6 +50,8 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
       </li>
 
       <li><strong>Similitud:</strong> {{ intercambio.similitud }}</li>
+
+      <ButtonUI v-if="compareWith" @click="if (!!action) action();">Intercambiar</ButtonUI>
     </ul>
   </div>
 </template>
