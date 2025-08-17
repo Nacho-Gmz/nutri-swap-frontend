@@ -7,6 +7,7 @@ import { useToasts } from "@/modules/common/composables/useToast";
 import { getFoodInformationAction, swapFoodAction } from "@/modules/common/actions";
 import type { Alimento, Swap } from "@/modules/common/types";
 import RegisterModal from "../components/RegisterModal.vue";
+import FoodCarrousel from "@/modules/common/components/FoodCarrousel.vue";
 
 const selectedFoodId = ref<number | null>(null);
 const selectedFoodInfo = ref<Alimento | null>(null);
@@ -41,28 +42,29 @@ const attemptSwap = async () => {
 </script>
 
 <template>
-  <div class="flex h-full max-h-full flex-col gap-2 overflow-hidden">
+  <div class="flex h-full max-h-full max-w-340 flex-col gap-2 overflow-hidden">
     <SimpleCard class="flex flex-col gap-2">
       <FoodCombobox @select="handleFoodSelect" />
       <button class="btn w-auto" :disabled="!selectedFoodId" @click="handleSwap">
         Intercambia
       </button>
-    </SimpleCard>
-    <SimpleCard class="flex max-h-[50vh] gap-2 overflow-x-auto overflow-y-auto">
-      <FoodCard
-        v-if="selectedFoodInfo"
-        :intercambio="{ alimento: selectedFoodInfo, similitud: 100 }"
-        :compare-with="null"
-      />
 
-      <div class="overflow-x-auto overflow-y-auto">
-        <FoodCard
-          v-for="swap in possibleSwaps"
-          :key="swap.alimento.id"
-          :intercambio="swap"
-          :compare-with="selectedFoodInfo"
-          :action="attemptSwap"
-        />
+      <div class="flex w-full gap-2">
+        <div class="w-1/2 items-center justify-center p-4 px-12">
+          <FoodCard
+            v-if="selectedFoodInfo"
+            :intercambio="{ alimento: selectedFoodInfo, similitud: 100 }"
+            :compare-with="null"
+          />
+        </div>
+
+        <div v-if="possibleSwaps" class="w-1/2 items-center justify-center">
+          <FoodCarrousel
+            :intercambios="possibleSwaps"
+            :compare-with="selectedFoodInfo"
+            :action="attemptSwap"
+          />
+        </div>
       </div>
     </SimpleCard>
     <RegisterModal v-if="isModalOpen" @close="isModalOpen = false"></RegisterModal>

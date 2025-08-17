@@ -55,7 +55,7 @@ onMounted(async () => {
         />
       </div>
       <ComboboxOptions
-        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-white/50 py-1 text-base shadow-lg ring-1 ring-black/5 backdrop-blur-2xl focus:outline-none sm:text-sm dark:border-gray-600/50 dark:bg-gray-900/10"
+        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-white/50 py-1 text-base shadow-lg ring-1 ring-black/5 backdrop-blur-2xl focus:outline-none sm:text-sm dark:border-gray-600/50 dark:bg-gray-900/10"
       >
         <div
           v-if="filteredFood.length === 0 && query !== ''"

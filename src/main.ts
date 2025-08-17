@@ -1,3 +1,6 @@
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import "./assets/main.css";
 
 import { createApp } from "vue";

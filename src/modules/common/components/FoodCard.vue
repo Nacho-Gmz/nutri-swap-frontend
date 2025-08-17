@@ -49,10 +49,13 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
         >
       </li>
 
-      <li><strong>Similitud:</strong> {{ intercambio.similitud }}</li>
-
-      <ButtonUI v-if="compareWith" @click="if (!!action) action();">Intercambiar</ButtonUI>
+      <li v-if="compareWith">
+        <strong>Similitud:</strong> {{ intercambio.similitud.toFixed(2) }} %
+      </li>
     </ul>
+    <div class="flex items-center justify-center">
+      <ButtonUI v-if="compareWith" @click="if (!!action) action();">Intercambiar</ButtonUI>
+    </div>
   </div>
 </template>
 
