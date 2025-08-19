@@ -14,9 +14,12 @@ interface MakeSwapSuccess {
   swap: UserSwap;
 }
 
-export const makeSwapAction = async (user_id: number): Promise<MakeSwapError | MakeSwapSuccess> => {
+export const makeSwapAction = async (
+  user_id: number,
+  swapData: { original_food_id: number; swapped_food_id: number },
+): Promise<MakeSwapError | MakeSwapSuccess> => {
   try {
-    const { data } = await nutriSwapAPI.post(`/intercambios/${user_id}`);
+    const { data } = await nutriSwapAPI.post(`/intercambios/${user_id}`, swapData);
     return {
       ok: true,
       message: "Intercambio creado exitosamente",

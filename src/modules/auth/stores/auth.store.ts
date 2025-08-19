@@ -2,9 +2,10 @@ import { ref } from "vue";
 
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
+import { jwtDecode } from "jwt-decode";
 
 import { loginAction, registerAction } from "../actions";
-import type { User } from "../types";
+import type { AuthJwtPayload, User } from "../types";
 
 export const useAuthStore = defineStore("auth", () => {
   const isLoggedIn = ref<boolean>(false);
@@ -18,8 +19,8 @@ export const useAuthStore = defineStore("auth", () => {
         logout();
         return [false, loginResponse.message];
       }
-
-      user.value = loginResponse.user;
+      const decodedToken = jwtDecode<AuthJwtPayload>(loginResponse.token);
+      user.value = { email: decodedToken.email, userId: decodedToken.user_id };
       token.value = loginResponse.token;
       isLoggedIn.value = true;
 

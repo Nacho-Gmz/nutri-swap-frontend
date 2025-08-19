@@ -5,14 +5,14 @@ import SimpleCard from "@/modules/common/components/SimpleCard.vue";
 import FoodCard from "@/modules/common/components/FoodCard.vue";
 import { useToasts } from "@/modules/common/composables/useToast";
 import { getFoodInformationAction, swapFoodAction } from "@/modules/common/actions";
+import { makeSwapAction } from "@/modules/dashboard/actions/make-swap.action";
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
 import type { Alimento, Swap } from "@/modules/common/types";
-import RegisterModal from "../components/RegisterModal.vue";
 import FoodCarrousel from "@/modules/common/components/FoodCarrousel.vue";
 
 const selectedFoodId = ref<number | null>(null);
 const selectedFoodInfo = ref<Alimento | null>(null);
 const possibleSwaps = ref<Swap[] | null>(null);
-const isModalOpen = ref<boolean>(false);
 
 function handleFoodSelect(id: number) {
   selectedFoodId.value = id;
@@ -36,14 +36,36 @@ const handleSwap = async () => {
   possibleSwaps.value = swapFoodResponse.swaps;
 };
 
-const attemptSwap = async () => {
-  isModalOpen.value = true;
+// Handler for swap action from FoodCarrousel
+const authStore = useAuthStore();
+const handleMakeSwap = async (swappedFoodId: number) => {
+  if (!authStore.user || !selectedFoodId.value || !swappedFoodId) {
+    useToasts().showToast("Faltan datos para registrar el intercambio", "error", 3000);
+    return;
+  }
+  // Ensure userId is a number if needed
+  const userId =
+    typeof authStore.user.userId === "string"
+      ? parseInt(authStore.user.userId, 10)
+      : authStore.user.userId;
+  const res = await makeSwapAction(userId, {
+    original_food_id: selectedFoodId.value,
+    swapped_food_id: Number(swappedFoodId),
+  });
+  if (res.ok) {
+    useToasts().showToast("Intercambio registrado exitosamente", "success", 3000);
+  } else {
+    useToasts().showToast(res.message, "error", 3000);
+  }
 };
 </script>
 
 <template>
-  <div class="flex h-full max-h-full max-w-340 flex-col gap-2 overflow-hidden">
+  <div class="flex h-full max-h-full max-w-340 flex-col gap-2 overflow-visible">
     <SimpleCard class="flex flex-col gap-2">
+      <h1 class="text-green-600 dark:text-green-400">
+        Bienvenido [Usuario], ¿listo para intercambiar?
+      </h1>
       <FoodCombobox @select="handleFoodSelect" />
       <button class="btn w-auto" :disabled="!selectedFoodId" @click="handleSwap">
         Intercambia
@@ -62,11 +84,10 @@ const attemptSwap = async () => {
           <FoodCarrousel
             :intercambios="possibleSwaps"
             :compare-with="selectedFoodInfo"
-            :action="attemptSwap"
+            :action="(swap) => handleMakeSwap(swap.alimento.id)"
           />
         </div>
       </div>
     </SimpleCard>
-    <RegisterModal v-if="isModalOpen" @close="isModalOpen = false"></RegisterModal>
   </div>
 </template>

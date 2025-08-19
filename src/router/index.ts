@@ -48,7 +48,7 @@ const router = createRouter({
         {
           path: "/user-swapper",
           name: "user swapper",
-          component: () => import("@/modules/dashboard/pages/HomePage.vue"),
+          component: () => import("@/modules/dashboard/pages/UserSwapPage.vue"),
           meta: { requiresAuth: true },
         },
         {

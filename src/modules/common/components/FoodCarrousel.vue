@@ -21,7 +21,7 @@ const navigationOptions = {
 const props = defineProps<{
   intercambios: Swap[];
   compareWith?: Alimento | null;
-  action?: () => void;
+  action?: (swap: Swap) => void;
 }>();
 </script>
 
@@ -32,7 +32,7 @@ const props = defineProps<{
         <FoodCard
           :intercambio="swap"
           :compareWith="compareWith || null"
-          :action="!!action ? action : undefined"
+          :action="!!action ? () => action(swap) : undefined"
         />
       </div>
     </swiper-slide>
