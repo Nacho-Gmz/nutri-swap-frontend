@@ -1,20 +1,96 @@
-@import url("https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
+@layer utilities {
+  /* Base glow text */
+  .glow {
+    /* Default variables */
+    --glow-start: theme("colors.pink.600");
+    --glow-end: theme("colors.pink.400");
+    --text-color: theme("colors.white");
+    color: var(--text-color);
+
+    /* Subtle static glow */
+    text-shadow:
+      0 0 4px #fff,
+      0 0 8px var(--glow-start),
+      0 0 12px var(--glow-start);
+  }
+
+  /* Hover pulse animation */
+  @keyframes glow {
+    from {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 8px var(--glow-start),
+        0 0 12px var(--glow-start);
+    }
+    to {
+      text-shadow:
+        0 0 8px #fff,
+        0 0 12px var(--glow-end),
+        0 0 16px var(--glow-end);
+    }
+  }
+
+  .glow:hover {
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+
+  /* Glow color utilities */
+  .glow-pink {
+    --glow-start: theme("colors.pink.600");
+    --glow-end: theme("colors.pink.400");
+  }
+  .glow-purple {
+    --glow-start: theme("colors.purple.600");
+    --glow-end: theme("colors.purple.400");
+  }
+  .glow-cyan {
+    --glow-start: theme("colors.cyan.600");
+    --glow-end: theme("colors.cyan.400");
+  }
+  .glow-green {
+    --glow-start: theme("colors.green.600");
+    --glow-end: theme("colors.green.400");
+  }
+
+  /* Text color utilities */
+  .text-white {
+    --text-color: theme("colors.white");
+  }
+  .text-black {
+    --text-color: theme("colors.black");
+  }
+  .text-pink {
+    --text-color: theme("colors.pink.500");
+  }
+  .text-cyan {
+    --text-color: theme("colors.cyan.400");
+  }
+  .text-purple {
+    --text-color: theme("colors.purple.500");
+  }
+  .text-green {
+    --text-color: theme("colors.green.500");
+  }
+}
+
 @theme {
   --font-*: initial;
-  --font-vollkorn: Vollkorn, serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
 }
 
 body {
-  @apply font-vollkorn relative z-1 bg-emerald-200 font-normal dark:bg-emerald-800;
+  @apply font-space-grotesk relative z-1 bg-emerald-200 font-normal dark:bg-emerald-800;
   background-image: url("./images/food-pattern-bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-attachment: fixed;
 }
 
 .input {
@@ -29,8 +105,8 @@ body {
   @apply mb-1.5 block text-lg font-medium text-gray-800 dark:text-white/90;
 }
 
-.btn {
-  @apply flex w-full items-center justify-center rounded-lg bg-sky-500/70 px-4 py-3 font-medium text-white/90 shadow-md transition hover:bg-sky-600/70;
+.button {
+  @apply items-center justify-center rounded-lg bg-sky-500 px-4 py-3 font-medium text-white/90 shadow-md transition hover:bg-sky-600;
 }
 
 .link {

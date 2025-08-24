@@ -8,11 +8,6 @@ import type { Alimento } from "../types/alimentos.interface";
 
 const modules = [Navigation, Pagination, Autoplay];
 
-const paginationOptions = {
-  el: ".swiper-pagination",
-  clickable: true,
-};
-
 const navigationOptions = {
   nextEl: ".swiper-button-next",
   prevEl: ".swiper-button-prev",
@@ -26,17 +21,16 @@ const props = defineProps<{
 </script>
 
 <template>
-  <swiper :modules="modules" :pagination="paginationOptions" :navigation="navigationOptions">
+  <swiper :modules="modules" :navigation="navigationOptions">
     <swiper-slide v-for="(swap, index) in intercambios.slice(0, 5)" :key="index">
-      <div class="w-full overflow-auto rounded-lg px-12 pt-4 pb-10">
-        <FoodCard
+      <div class="w-full overflow-auto rounded-lg px-12 py-4">
+        <food-card
           :intercambio="swap"
           :compareWith="compareWith || null"
           :action="!!action ? () => action(swap) : undefined"
         />
       </div>
     </swiper-slide>
-    <div class="swiper-pagination"></div>
     <div class="swiper-button-prev">
       <svg
         class="h-auto w-auto stroke-current"

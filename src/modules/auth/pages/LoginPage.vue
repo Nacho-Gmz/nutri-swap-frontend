@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
-import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
 import { useLogin } from "../composables/useLogin";
 
 const { email, password, showPassword, togglePasswordVisibility, onLogin } = useLogin();
@@ -12,8 +11,15 @@ const { email, password, showPassword, togglePasswordVisibility, onLogin } = use
   >
     <div class="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
       <div>
+        <div
+          class="inline-block w-fit transition duration-500 ease-in-out hover:scale-105 md:hidden"
+        >
+          <router-link class="block rounded-xl" to="/">
+            <h1 class="glow glow-green text-6xl font-bold text-green-100 md:text-8xl">NutriSwap</h1>
+          </router-link>
+        </div>
         <div class="mb-5 flex items-center justify-between">
-          <h1 class="mb-2 text-xl font-bold text-sky-600 dark:text-sky-300">Inicia sesión</h1>
+          <h1 class="mb-2 text-2xl font-bold text-green-700 dark:text-green-200">Inicia sesión</h1>
           <ThemeToggler />
         </div>
         <div>
@@ -58,9 +64,7 @@ const { email, password, showPassword, togglePasswordVisibility, onLogin } = use
 
               <!-- Button -->
               <div>
-                <ButtonUI start-icon="bx-arrow-in-right-square-half" size="sm" class-name="w-full"
-                  >Ingresa</ButtonUI
-                >
+                <button class="button w-full hover:scale-105">Ingresa</button>
               </div>
             </div>
           </form>

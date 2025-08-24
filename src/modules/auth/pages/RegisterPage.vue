@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ThemeToggler from "@/modules/common/components/ThemeToggler.vue";
-import ButtonUI from "@/modules/common/components/ui/ButtonUI.vue";
 import { useRegister } from "../composables/useRegister";
 
 const {
@@ -20,8 +19,13 @@ const {
     class="flex w-full flex-1 flex-col bg-gray-50/10 p-6 backdrop-blur-3xl lg:w-1/2 dark:bg-gray-900/10"
   >
     <div class="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
+      <div class="inline-block w-fit transition duration-500 ease-in-out hover:scale-105 md:hidden">
+        <router-link class="block rounded-xl" to="/">
+          <h1 class="glow glow-green text-6xl font-bold text-green-100 md:text-8xl">NutriSwap</h1>
+        </router-link>
+      </div>
       <div class="mb-5 flex items-center justify-between">
-        <h1 class="mb-2 text-xl font-bold text-sky-600 dark:text-sky-300">Regístrate</h1>
+        <h1 class="mb-2 text-2xl font-bold text-green-700 dark:text-green-200">Regístrate</h1>
         <ThemeToggler />
       </div>
       <div>
@@ -134,9 +138,7 @@ const {
             </div>
             <!-- Button -->
             <div>
-              <ButtonUI start-icon="bx-user-plus" size="sm" class-name="w-full"
-                >Crea tu cuenta</ButtonUI
-              >
+              <button class="button w-full hover:scale-105">Crea tu cuenta</button>
             </div>
           </div>
         </form>

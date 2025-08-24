@@ -5,11 +5,15 @@
     <div class="z-1 flex items-center justify-center">
       <div class="flex max-w-xs flex-col items-center gap-4">
         <RouterLink to="/">
-          <img width="{231}" height="{48}" src="" alt="Logo" />
-        </RouterLink>
-        <RouterLink to="/">
-          <div class="rounded-2xl p-4 backdrop-blur-3xl">
-            <p class="text-center text-3xl font-bold text-sky-600 dark:text-sky-300">NutriSwap</p>
+          <div
+            class="inline-block w-fit transition duration-500 ease-in-out hover:scale-105"
+            style="will-change: transform; backface-visibility: hidden; transform: translateZ(0)"
+          >
+            <span class="block rounded-xl">
+              <h1 class="glow glow-green text-6xl font-bold text-green-100 md:text-8xl">
+                NutriSwap
+              </h1>
+            </span>
           </div>
         </RouterLink>
       </div>

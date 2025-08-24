@@ -17,7 +17,7 @@ const router = createRouter({
         {
           path: "/landing",
           name: "homepage",
-          component: () => import("@/modules/landing/pages/LandingPage.vue"),
+          component: () => import("@/modules/landing/pages/HomePage.vue"),
           meta: { requiresAuth: false },
         },
         {

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-xl border border-gray-200 bg-white/50 p-4 text-gray-800 backdrop-blur-3xl lg:border-b dark:border-gray-600/50 dark:bg-gray-900/10 dark:text-white/90"
+    class="rounded-xl border-2 border-green-700 bg-white/50 p-2 text-gray-800 backdrop-blur-3xl transition duration-500 ease-in-out md:p-4 dark:border-green-200 dark:bg-gray-900/10 dark:text-white/90"
   >
     <slot></slot>
   </div>

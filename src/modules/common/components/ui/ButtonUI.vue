@@ -45,7 +45,7 @@ const onClick = () => {
 <template>
   <button
     :class="[
-      'inline-flex items-center justify-center gap-2 rounded-lg border-2 font-medium text-gray-700 shadow-md backdrop-blur-3xl transition dark:text-gray-200',
+      'inline-flex items-center justify-center gap-2 rounded-lg border-2 font-medium text-gray-700 shadow-md backdrop-blur-3xl transition duration-500 ease-in-out dark:text-gray-200',
       sizeClasses[size],
       variantClasses[variant],
       className,

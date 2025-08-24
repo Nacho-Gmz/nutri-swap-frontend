@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
 import type { Alimento, Swap } from "../types/alimentos.interface";
-import ButtonUI from "./ui/ButtonUI.vue";
 
 const props = defineProps<{
   intercambio: Swap;
@@ -20,10 +19,9 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
 </script>
 
 <template>
-  <div class="rounded-2xl border-2 p-4">
-    <h3 class="text-2xl font-semibold">{{ intercambio.alimento.name }}</h3>
+  <div class="rounded-2xl p-4">
+    <h3 class="glow glow-cyan text-2xl font-semibold">{{ intercambio.alimento.name }}</h3>
     <ul>
-      <li><strong>Categoría:</strong> {{ intercambio.alimento.category }}</li>
       <li>
         <strong>Cantidad:</strong> {{ intercambio.alimento.quantity }}
         {{ intercambio.alimento.unit }}
@@ -54,7 +52,13 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
       </li>
     </ul>
     <div class="flex items-center justify-center">
-      <ButtonUI v-if="compareWith" @click="if (!!action) action();">Intercambiar</ButtonUI>
+      <button
+        v-if="compareWith"
+        class="button w-40 hover:scale-105 md:w-50"
+        @click="if (!!action) action();"
+      >
+        intercambia
+      </button>
     </div>
   </div>
 </template>
