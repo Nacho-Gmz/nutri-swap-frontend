@@ -1,17 +1,7 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { RegisterCredentials } from "../types";
-
-interface RegisterError {
-  ok: false;
-  message: string;
-}
-
-interface RegisterSuccess {
-  ok: true;
-  message: string;
-}
+import type { RegisterCredentials, RegisterError, RegisterSuccess } from "../types";
 
 export const registerAction = async (
   registerCredentials: RegisterCredentials,

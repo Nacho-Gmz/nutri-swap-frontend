@@ -57,7 +57,7 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
         class="button w-40 hover:scale-105 md:w-50"
         @click="if (!!action) action();"
       >
-        intercambia
+        Intercambia
       </button>
     </div>
   </div>

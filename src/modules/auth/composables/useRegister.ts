@@ -1,9 +1,8 @@
 import { ref } from "vue";
 import { showToast } from "@/modules/common/composables/useToast";
 import router from "@/router";
-import { useAuthStore } from "../stores/auth.store";
 
-const authStore = useAuthStore();
+import { registerAction } from "../actions";
 
 export const useRegister = () => {
   const firstName = ref<string>("");
@@ -36,23 +35,24 @@ export const useRegister = () => {
       return;
     }
 
-    const [ok, message] = await authStore.register(
-      firstName.value,
-      lastName.value,
-      email.value,
-      password.value,
-    );
+    const response = await registerAction({
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      password: password.value,
+    });
 
-    if (!ok) {
-      showToast(message, "error");
-    } else {
-      showToast(message, "success");
-      firstName.value = "";
-      lastName.value = "";
-      email.value = "";
-      password.value = "";
-      router.push({ name: "login" });
+    if (!response.ok) {
+      showToast(response.message, "error");
+      return;
     }
+
+    showToast(response.message, "success");
+    firstName.value = "";
+    lastName.value = "";
+    email.value = "";
+    password.value = "";
+    router.push({ name: "login" });
   };
 
   return {

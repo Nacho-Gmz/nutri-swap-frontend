@@ -1,21 +1,11 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { AuthResponse } from "../types";
-
-interface RefreshTokenError {
-  ok: false;
-  message: string;
-}
-
-interface RefreshTokenSuccess {
-  ok: true;
-  token: string;
-}
+import type { RefreshTokenError, RefreshTokenResponse, RefreshTokenSuccess } from "../types";
 
 export const refreshTokenAction = async (): Promise<RefreshTokenError | RefreshTokenSuccess> => {
   try {
-    const { data } = await nutriSwapAPI.post<AuthResponse>(`/auth/refresh-token`);
+    const { data } = await nutriSwapAPI.post<RefreshTokenResponse>(`/auth/refresh-token`);
 
     return {
       ok: true,

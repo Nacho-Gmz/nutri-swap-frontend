@@ -1,23 +1,13 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { AuthResponse, LoginCredentials } from "../types";
-
-interface LoginError {
-  ok: false;
-  message: string;
-}
-
-interface LoginSuccess {
-  ok: true;
-  token: string;
-}
+import type { LoginCredentials, LoginError, LoginResponse, LoginSuccess } from "../types";
 
 export const loginAction = async (
   loginCredentials: LoginCredentials,
 ): Promise<LoginError | LoginSuccess> => {
   try {
-    const { data } = await nutriSwapAPI.post<AuthResponse>(`/auth/login`, loginCredentials);
+    const { data } = await nutriSwapAPI.post<LoginResponse>(`/auth/login`, loginCredentials);
 
     return {
       ok: true,

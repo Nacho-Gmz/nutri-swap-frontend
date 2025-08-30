@@ -73,18 +73,15 @@ const router = createRouter({
   ],
 });
 
-// router.beforeEach((to, from) => {
-//   const user = useAuthStore();
-//   // const userAuthenticated = user.isLoggedIn;
-//   const userAuthenticated = false;
+router.beforeEach((to, from) => {
+  const auth = useAuthStore();
 
-//   if (to.meta.requiresAuth && !userAuthenticated) {
-//     return { name: "login" };
-//   }
-//   if (to.name === "login" && userAuthenticated) {
-//     return { name: "dashboard" };
-//   }
-
-//   return true;
-// });
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    return { name: "login" };
+  } else if (!to.meta.requiresAuth && auth.isAuthenticated) {
+    return { name: "dashboard" };
+  } else {
+    return true;
+  }
+});
 export default router;

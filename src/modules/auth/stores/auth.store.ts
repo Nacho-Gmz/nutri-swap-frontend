@@ -1,71 +1,40 @@
-import { ref } from "vue";
+import { computed } from "vue";
 
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
 import { jwtDecode } from "jwt-decode";
+import { useLocalStorage } from "@vueuse/core";
 
-import { loginAction, registerAction } from "../actions";
-import type { AuthJwtPayload, User } from "../types";
+import type { LoginJwtPayload, User } from "../types";
+
+const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
 export const useAuthStore = defineStore("auth", () => {
-  const isLoggedIn = ref<boolean>(false);
-  const user = ref<User | undefined>();
-  const token = ref(useLocalStorage("access-token", ""));
+  const accessToken = useLocalStorage<string>(ACCESS_TOKEN_KEY, "");
+  const user = useLocalStorage<User | undefined>("user", undefined);
 
-  const login = async (email: string, password: string): Promise<[boolean, string]> => {
-    try {
-      const loginResponse = await loginAction({ email, password });
-      if (!loginResponse.ok) {
-        logout();
-        return [false, loginResponse.message];
-      }
-      const decodedToken = jwtDecode<AuthJwtPayload>(loginResponse.token);
-      user.value = { email: decodedToken.email, userId: decodedToken.user_id };
-      token.value = loginResponse.token;
-      isLoggedIn.value = true;
+  const isAuthenticated = computed(() => !!accessToken.value);
 
-      return [true, "¡Inicio de sesión exitoso!"];
-    } catch (error) {
-      console.log(error);
-      logout();
-      return [false, "Error desconocido"];
-    }
+  const login = (token: string) => {
+    const decodedToken = jwtDecode<LoginJwtPayload>(token);
+    accessToken.value = token;
+    user.value = { email: decodedToken.email, userId: decodedToken.user_id };
   };
 
-  const register = async (
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-  ): Promise<[boolean, string]> => {
-    try {
-      const registerResponse = await registerAction({ firstName, lastName, email, password });
-
-      if (!registerResponse.ok) {
-        logout();
-        return [false, registerResponse.message];
-      }
-
-      return [true, registerResponse.message];
-    } catch (error) {
-      console.log(error);
-      logout();
-      return [false, "Error desconocido"];
-    }
+  const refreshToken = (token: string) => {
+    accessToken.value = token;
   };
 
   const logout = () => {
-    isLoggedIn.value = false;
     user.value = undefined;
-    token.value = "";
+    accessToken.value = "";
   };
 
   return {
-    isLoggedIn,
+    isAuthenticated,
+    accessToken,
     user,
-    token,
     login,
-    register,
+    refreshToken,
     logout,
   };
 });

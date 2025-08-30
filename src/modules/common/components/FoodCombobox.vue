@@ -16,6 +16,9 @@ watch(selectedFood, (newVal) => {
   }
 });
 
+const displayFoodName = (item: unknown) =>
+  item && typeof item === "object" && "name" in item ? (item as { name: string }).name : "alimento";
+
 const filteredFood = computed(() => {
   const q = debouncedQuery.value.trim().toLowerCase();
   const results =
@@ -45,12 +48,7 @@ onMounted(async () => {
       >
         <ComboboxInput
           class="combobox relative w-full cursor-default overflow-hidden rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
-          :displayValue="
-            (food) =>
-              food && typeof food === 'object' && 'name' in food
-                ? (food as { name: string }).name
-                : ''
-          "
+          :displayValue="displayFoodName"
           @input="query = $event.target.value"
         />
       </div>
