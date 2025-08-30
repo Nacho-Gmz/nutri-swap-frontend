@@ -1,14 +1,14 @@
-interface NombreAlimento {
+interface FoodName {
   id: number;
   name: string;
 }
 
 interface Swap {
-  alimento: Alimento;
+  alimento: Food;
   similitud: number;
 }
 
-interface Alimento {
+interface Food {
   name: string;
   category: string;
   quantity: number;
@@ -23,4 +23,4 @@ interface Alimento {
   created_at: Date;
 }
 
-export type { NombreAlimento, Alimento, Swap };
+export type { FoodName, Food, Swap };

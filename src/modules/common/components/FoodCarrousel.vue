@@ -3,8 +3,7 @@ import { defineProps } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import FoodCard from "./FoodCard.vue";
-import type { Swap } from "../types/alimentos.interface";
-import type { Alimento } from "../types/alimentos.interface";
+import type { Food, Swap } from "../types";
 
 const modules = [Navigation, Pagination, Autoplay];
 
@@ -13,9 +12,9 @@ const navigationOptions = {
   prevEl: ".swiper-button-prev",
 };
 
-const props = defineProps<{
+defineProps<{
   intercambios: Swap[];
-  compareWith?: Alimento | null;
+  compareWith?: Food | null;
   action?: (swap: Swap) => void;
 }>();
 </script>

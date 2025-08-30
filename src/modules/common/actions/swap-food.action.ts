@@ -1,17 +1,7 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { Swap } from "../types";
-
-interface SwapFoodError {
-  ok: false;
-  message: string;
-}
-
-interface SwapFoodSuccess {
-  ok: true;
-  swaps: Swap[];
-}
+import type { SwapFoodError, SwapFoodSuccess } from "../types";
 
 export const swapFoodAction = async (
   originalId: number,

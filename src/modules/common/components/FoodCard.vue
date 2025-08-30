@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { defineProps } from "vue";
-import type { Alimento, Swap } from "../types/alimentos.interface";
+import type { Food, Swap } from "../types";
 
 const props = defineProps<{
   intercambio: Swap;
-  compareWith: Alimento | null;
+  compareWith: Food | null;
   action?: () => void;
 }>();
 

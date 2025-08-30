@@ -1,17 +1,7 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { NombreAlimento } from "../types";
-
-interface GetFoodsNamesError {
-  ok: false;
-  message: string;
-}
-
-interface GetFoodsNamesSuccess {
-  ok: true;
-  foodNames: NombreAlimento[];
-}
+import type { GetFoodsNamesError, GetFoodsNamesSuccess } from "../types";
 
 export const getFoodsNamesAction = async (): Promise<GetFoodsNamesError | GetFoodsNamesSuccess> => {
   try {

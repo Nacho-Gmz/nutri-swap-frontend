@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch, defineEmits } from "vue";
 import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption } from "@headlessui/vue";
-import { getFoodsNamesAction } from "../actions/get-foods-names.action";
+import { getFoodsNamesAction } from "../actions";
 
 const emit = defineEmits<{ (e: "select", id: number): void }>();
 const foods = ref<{ id: number; name: string }[]>([]);
