@@ -9,10 +9,10 @@ const dropdownRef = ref<HTMLElement | null>(null);
 
 const { user, logout } = useAuthStore();
 
-const menuItems = [
-  { href: "/profile", icon: "bx-user", text: "Perfil" },
-  { href: "/account-settings", icon: "bx-cog", text: "Ajustes de cuenta" },
-];
+// const menuItems = [
+//   { href: "/profile", icon: "bx-user", text: "Perfil" },
+//   { href: "/account-settings", icon: "bx-cog", text: "Ajustes de cuenta" },
+// ];
 
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value;
@@ -24,7 +24,7 @@ const closeDropdown = () => {
 
 const signOut = () => {
   logout();
-  router.push({ name: "landing" });
+  router.push({ name: "login" });
 };
 
 const handleClickOutside = (event: Event) => {
@@ -45,7 +45,7 @@ onUnmounted(() => {
 <template>
   <div class="relative" ref="dropdownRef">
     <button
-      class="flex items-center text-green-600 dark:text-green-400"
+      class="flex items-center rounded-2xl border border-green-200 bg-white/50 p-5 text-green-600 backdrop-blur-3xl dark:border-green-600/30 dark:bg-gray-900/10 dark:text-green-400"
       @click.prevent="toggleDropdown"
     >
       <span class="text-md mr-1 block font-medium">{{ user?.email }}</span>
@@ -56,13 +56,13 @@ onUnmounted(() => {
     <!-- Dropdown Start -->
     <div
       v-if="dropdownOpen"
-      class="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border-2 border-green-200 bg-white/50 p-3 shadow-lg backdrop-blur-3xl dark:border-green-800 dark:bg-gray-900/10"
+      class="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-green-200 bg-white/50 p-3 shadow-lg backdrop-blur-3xl dark:border-green-800 dark:bg-gray-900/10"
     >
       <div class="text-green-600 dark:text-green-400">
         {{ user?.email }}
       </div>
 
-      <ul class="flex flex-col gap-1 border-b border-green-300 pt-4 pb-3 dark:border-green-800">
+      <!-- <ul class="flex flex-col gap-1 border-b border-green-300 pt-4 pb-3 dark:border-green-800">
         <li v-for="item in menuItems" :key="item.href">
           <router-link
             :to="item.href"
@@ -75,7 +75,7 @@ onUnmounted(() => {
             {{ item.text }}
           </router-link>
         </li>
-      </ul>
+      </ul> -->
       <router-link
         to="/login"
         @click="signOut"

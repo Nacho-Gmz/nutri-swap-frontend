@@ -21,7 +21,7 @@ interface LoginResponse {
 }
 
 interface LoginJwtPayload extends JwtPayload {
-  user_id: string;
+  user_id: number;
   email: string;
 }
 

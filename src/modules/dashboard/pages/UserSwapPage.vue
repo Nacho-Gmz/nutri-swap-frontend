@@ -7,11 +7,11 @@ import { useToasts } from "@/modules/common/composables/useToast";
 import { getFoodInformationAction, swapFoodAction } from "@/modules/common/actions";
 import { makeSwapAction } from "@/modules/dashboard/actions/make-swap.action";
 import { useAuthStore } from "@/modules/auth/stores/auth.store";
-import type { Alimento, Swap } from "@/modules/common/types";
+import type { Food, Swap } from "@/modules/common/types";
 import FoodCarrousel from "@/modules/common/components/FoodCarrousel.vue";
 
 const selectedFoodId = ref<number | null>(null);
-const selectedFoodInfo = ref<Alimento | null>(null);
+const selectedFoodInfo = ref<Food | null>(null);
 const possibleSwaps = ref<Swap[] | null>(null);
 
 function handleFoodSelect(id: number) {
@@ -62,15 +62,24 @@ const handleMakeSwap = async (swappedFoodId: number) => {
 
 <template>
   <div class="flex h-full max-h-full max-w-340 flex-col gap-2 overflow-visible">
-    <SimpleCard class="flex flex-col gap-2">
-      <h1 class="text-green-600 dark:text-green-400">
-        Bienvenido [Usuario], ¿listo para intercambiar?
-      </h1>
-      <FoodCombobox @select="handleFoodSelect" />
-      <button class="btn w-auto" :disabled="!selectedFoodId" @click="handleSwap">
-        Intercambia
-      </button>
-
+    <simple-card class="flex w-full flex-col gap-2">
+      <div class="flex w-full flex-col items-center justify-center gap-2">
+        <h1 class="w-full grow text-green-600 dark:text-green-400">
+          Bienvenido [Usuario], ¿listo para intercambiar?
+        </h1>
+        <div class="flex w-full flex-col items-center justify-center gap-2 md:flex-row">
+          <food-combobox class="w-full grow" @select="handleFoodSelect" />
+          <div class="flex w-full justify-center md:w-auto">
+            <button
+              class="button w-full duration-300 ease-in-out hover:scale-105"
+              :disabled="!selectedFoodId"
+              @click="handleSwap"
+            >
+              Busca
+            </button>
+          </div>
+        </div>
+      </div>
       <div v-if="selectedFoodInfo && possibleSwaps" class="flex w-full gap-2">
         <div class="w-1/2 items-center justify-center p-4 px-12">
           <FoodCard
@@ -88,6 +97,6 @@ const handleMakeSwap = async (swappedFoodId: number) => {
           />
         </div>
       </div>
-    </SimpleCard>
+    </simple-card>
   </div>
 </template>

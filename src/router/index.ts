@@ -11,36 +11,22 @@ const router = createRouter({
     authRoutes,
     {
       path: "/",
-      redirect: "/landing",
       component: LandingLayout,
       children: [
         {
-          path: "/landing",
-          name: "homepage",
+          path: "",
+          name: "home",
           component: () => import("@/modules/landing/pages/HomePage.vue"),
-          meta: { requiresAuth: false },
-        },
-        {
-          path: "/about",
-          name: "about",
-          component: () => import("@/modules/landing/pages/AboutPage.vue"),
-          meta: { requiresAuth: false },
-        },
-        {
-          path: "/swapper",
-          name: "swapper",
-          component: () => import("@/modules/landing/pages/SwapperPage.vue"),
           meta: { requiresAuth: false },
         },
       ],
     },
     {
-      path: "/home",
-      redirect: { name: "dashboard" },
+      path: "/dashboard",
       component: DashboardLayout,
       children: [
         {
-          path: "/dashboard",
+          path: "",
           name: "dashboard",
           component: () => import("@/modules/dashboard/pages/HomePage.vue"),
           meta: { requiresAuth: true },
@@ -49,18 +35,6 @@ const router = createRouter({
           path: "/user-swapper",
           name: "user swapper",
           component: () => import("@/modules/dashboard/pages/UserSwapPage.vue"),
-          meta: { requiresAuth: true },
-        },
-        {
-          path: "/profile",
-          name: "profile",
-          component: () => import("@/modules/dashboard/pages/HomePage.vue"),
-          meta: { requiresAuth: true },
-        },
-        {
-          path: "/account-settings",
-          name: "account settings",
-          component: () => import("@/modules/dashboard/pages/HomePage.vue"),
           meta: { requiresAuth: true },
         },
       ],

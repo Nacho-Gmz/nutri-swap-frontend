@@ -18,7 +18,7 @@ function toastTypeClass(type: string) {
 </script>
 
 <template>
-  <div class="fixed top-4 right-4 z-99999999999999 flex flex-col gap-2">
+  <div class="fixed right-4 bottom-4 z-99999999999999 flex flex-col gap-2">
     <transition-group name="toast-fade" tag="div">
       <div
         v-for="toast in toasts"

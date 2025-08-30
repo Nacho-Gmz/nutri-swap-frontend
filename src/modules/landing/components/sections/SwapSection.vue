@@ -5,12 +5,12 @@ import SimpleCard from "@/modules/common/components/SimpleCard.vue";
 import FoodCard from "@/modules/common/components/FoodCard.vue";
 import { useToasts } from "@/modules/common/composables/useToast";
 import { getFoodInformationAction, swapFoodAction } from "@/modules/common/actions";
-import type { Alimento, Swap } from "@/modules/common/types";
+import type { Food, Swap } from "@/modules/common/types";
 import RegisterModal from "../RegisterModal.vue";
 import FoodCarrousel from "@/modules/common/components/FoodCarrousel.vue";
 
 const selectedFoodId = ref<number | null>(null);
-const selectedFoodInfo = ref<Alimento | null>(null);
+const selectedFoodInfo = ref<Food | null>(null);
 const possibleSwaps = ref<Swap[] | null>(null);
 const isModalOpen = ref<boolean>(false);
 
@@ -42,7 +42,7 @@ const attemptSwap = async () => {
 </script>
 
 <template>
-  <div class="relative flex h-screen flex-col items-center justify-center p-4 md:p-10">
+  <div class="relative flex h-screen flex-col items-center justify-start p-4 md:p-10">
     <div class="inline-block w-fit transition duration-500 ease-in-out hover:scale-105">
       <span class="block rounded-xl">
         <h1 class="glow glow-green text-5xl font-bold text-green-100 md:text-7xl">Pruébalo</h1>
@@ -53,7 +53,7 @@ const attemptSwap = async () => {
         <food-combobox class="w-full grow" @select="handleFoodSelect" />
         <div class="flex w-full justify-center md:w-auto">
           <button
-            class="button w-full hover:scale-105"
+            class="button w-full duration-300 ease-in-out hover:scale-105"
             :disabled="!selectedFoodId"
             @click="handleSwap"
           >

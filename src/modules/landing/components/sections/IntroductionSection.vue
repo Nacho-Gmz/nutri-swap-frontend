@@ -17,10 +17,16 @@ import router from "@/router";
         </h1>
       </simple-card>
       <div class="flex items-center justify-center gap-4">
-        <button class="button w-40 hover:scale-105 md:w-50" @click="router.push('/login')">
+        <button
+          class="button w-40 duration-300 ease-in-out hover:scale-105 md:w-50"
+          @click="router.push('/login')"
+        >
           Ingresa
         </button>
-        <button class="button w-40 hover:scale-105 md:w-50" @click="router.push('/register')">
+        <button
+          class="button w-40 duration-300 ease-in-out hover:scale-105 md:w-50"
+          @click="router.push('/register')"
+        >
           Regístrate
         </button>
       </div>

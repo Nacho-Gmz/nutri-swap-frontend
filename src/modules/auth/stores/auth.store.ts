@@ -10,7 +10,10 @@ const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
 export const useAuthStore = defineStore("auth", () => {
   const accessToken = useLocalStorage<string>(ACCESS_TOKEN_KEY, "");
-  const user = useLocalStorage<User | undefined>("user", undefined);
+  const user = useLocalStorage<User>("user", {
+    email: "",
+    userId: NaN,
+  });
 
   const isAuthenticated = computed(() => !!accessToken.value);
 

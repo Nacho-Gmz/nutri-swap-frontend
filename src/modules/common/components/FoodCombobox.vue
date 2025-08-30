@@ -1,14 +1,24 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch, defineEmits } from "vue";
-import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption } from "@headlessui/vue";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxOptions,
+  ComboboxOption,
+  ComboboxButton,
+} from "@headlessui/vue";
 import { getFoodsNamesAction } from "../actions";
 
 const emit = defineEmits<{ (e: "select", id: number): void }>();
 const foods = ref<{ id: number; name: string }[]>([]);
 const selectedFood = ref<{ id: number; name: string }>({ id: NaN, name: "" });
+
 const query = ref("");
 const debouncedQuery = ref("");
 let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
+// Control open state
+const isOpen = ref(false);
 
 watch(selectedFood, (newVal) => {
   if (newVal && !isNaN(newVal.id)) {
@@ -46,14 +56,24 @@ onMounted(async () => {
       <div
         class="relative w-full cursor-default overflow-hidden rounded-lg text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
       >
-        <ComboboxInput
-          class="combobox relative w-full cursor-default overflow-hidden rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
-          :displayValue="displayFoodName"
-          @input="query = $event.target.value"
-        />
+        <div class="flex">
+          <ComboboxInput
+            class="combobox relative w-full cursor-default overflow-hidden rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
+            :displayValue="displayFoodName"
+            @input="query = $event.target.value"
+            @focus="isOpen = true"
+          />
+          <ComboboxButton
+            @click="isOpen = !isOpen"
+            class="glow glow-green absolute top-0 right-0 ml-2 rounded px-2 py-1 dark:text-white"
+          >
+            <i class="bx bx-chevron-down text-4xl"></i>
+          </ComboboxButton>
+        </div>
       </div>
       <ComboboxOptions
-        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-white/50 py-1 text-base shadow-lg ring-1 ring-black/5 backdrop-blur-2xl focus:outline-none sm:text-sm dark:border-gray-600/50 dark:bg-gray-900/10"
+        v-show="isOpen"
+        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-green-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:border-gray-600/50 dark:bg-green-950"
       >
         <div
           v-if="filteredFood.length === 0 && query !== ''"
