@@ -1,0 +1,115 @@
+<script setup lang="ts">
+import { ref, computed, onMounted, watch, defineEmits } from "vue";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxOptions,
+  ComboboxOption,
+  ComboboxButton,
+} from "@headlessui/vue";
+import { getFoodsNamesAction } from "../actions";
+
+const emit = defineEmits<{ (e: "select", id: number): void }>();
+const foods = ref<{ id: number; name: string }[]>([]);
+const selectedFood = ref<{ id: number; name: string }>({ id: NaN, name: "" });
+
+const query = ref("");
+const debouncedQuery = ref("");
+let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+
+// Control open state
+const isOpen = ref(false);
+
+watch(selectedFood, (newVal) => {
+  if (newVal && !isNaN(newVal.id)) {
+    emit("select", newVal.id);
+  }
+});
+
+const displayFoodName = (item: unknown) =>
+  item && typeof item === "object" && "name" in item ? (item as { name: string }).name : "alimento";
+
+const filteredFood = computed(() => {
+  const q = debouncedQuery.value.trim().toLowerCase();
+  const results =
+    q === "" ? foods.value : foods.value.filter((food) => food.name.toLowerCase().includes(q));
+  return results.slice(0, 20); // Limit to top 20 results
+});
+
+watch(query, (newVal) => {
+  if (debounceTimeout) clearTimeout(debounceTimeout);
+  debounceTimeout = setTimeout(() => {
+    debouncedQuery.value = newVal;
+  }, 200); // 200ms debounce
+});
+
+onMounted(async () => {
+  const foodNamesResponse = await getFoodsNamesAction();
+  if (!foodNamesResponse.ok) return;
+  foods.value = foodNamesResponse.foodNames;
+});
+</script>
+
+<template>
+  <Combobox v-model="selectedFood">
+    <div class="relative">
+      <div
+        class="relative w-full cursor-default overflow-hidden rounded-lg text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
+      >
+        <div class="flex">
+          <ComboboxInput
+            class="combobox relative w-full cursor-default overflow-hidden rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-green-300 sm:text-sm"
+            :displayValue="displayFoodName"
+            @input="query = $event.target.value"
+            @focus="isOpen = true"
+          />
+          <ComboboxButton
+            @click="isOpen = !isOpen"
+            class="glow glow-green absolute top-0 right-0 ml-2 rounded px-2 py-1 dark:text-white"
+          >
+            <i class="bx bx-chevron-down text-4xl"></i>
+          </ComboboxButton>
+        </div>
+      </div>
+      <ComboboxOptions
+        v-show="isOpen"
+        class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-green-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm dark:border-gray-600/50 dark:bg-green-950"
+      >
+        <div
+          v-if="filteredFood.length === 0 && query !== ''"
+          class="relative cursor-default px-4 py-2 text-gray-700 select-none dark:text-white"
+        >
+          No se encontro el alimento.
+        </div>
+        <ComboboxOption
+          v-for="food in filteredFood"
+          :key="food.id"
+          :value="food"
+          v-slot="{ selected, active }"
+        >
+          <li
+            class="relative cursor-default py-2 pr-4 pl-10 select-none"
+            :class="{
+              'bg-green-600/30 text-sky-600 dark:text-sky-400/90': active,
+              'text-gray-900 dark:text-white/90': !active,
+            }"
+          >
+            <span
+              class="block truncate"
+              :class="{ 'font-medium': selected, 'font-normal': !selected }"
+            >
+              {{ food.name }}
+            </span>
+            <span
+              v-if="selected"
+              class="absolute inset-y-0 left-0 flex items-center pl-3"
+              :class="{ 'text-white': active, 'text-green-600': !active }"
+            >
+              <i class="bx bx-check"></i>
+            </span>
+          </li>
+        </ComboboxOption>
+      </ComboboxOptions>
+    </div>
+  </Combobox>
+</template>

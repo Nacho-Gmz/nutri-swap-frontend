@@ -1,50 +1,67 @@
-/**
- * router/index.ts
- *
- * Automatic routes for `./src/pages/*.vue`
- */
-
-// Composables
-import { createRouter, createWebHistory } from "vue-router/auto";
-import { setupLayouts } from "virtual:generated-layouts";
-import { routes } from "vue-router/auto-routes";
-import { useUserStore } from "@/stores/user";
+import { authRoutes } from "@/modules/auth/routes";
+import { useAuthStore } from "@/modules/auth/stores/auth.store";
+import NotFound from "@/modules/common/pages/NotFound.vue";
+import DashboardLayout from "@/modules/dashboard/layouts/DashboardLayout.vue";
+import LandingLayout from "@/modules/landing/layouts/LandingLayout.vue";
+import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(routes),
+  routes: [
+    authRoutes,
+    {
+      path: "/",
+      component: LandingLayout,
+      children: [
+        {
+          path: "",
+          name: "home",
+          component: () => import("@/modules/landing/pages/HomePage.vue"),
+          meta: { requiresAuth: false },
+        },
+      ],
+    },
+    {
+      path: "/dashboard",
+      component: DashboardLayout,
+      children: [
+        {
+          path: "",
+          name: "dashboard",
+          component: () => import("@/modules/dashboard/pages/DashboardPage.vue"),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: "user-swapper",
+          name: "user-swapper",
+          component: () => import("@/modules/dashboard/pages/UserSwapPage.vue"),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: "/user-about-us",
+          name: "user-about-us",
+          component: () => import("@/modules/dashboard/pages/InformationPage.vue"),
+          meta: { requiresAuth: true },
+        },
+      ],
+    },
+    {
+      path: "/:pathmatch(.*)*",
+      name: "not found",
+      component: NotFound,
+    },
+  ],
 });
-
-// Workaround for https://github.com/vitejs/vite/issues/11804
-router.onError((err, to) => {
-  if (err?.message?.includes?.("Failed to fetch dynamically imported module")) {
-    if (!localStorage.getItem("vuetify:dynamic-reload")) {
-      console.log("Reloading page to fix dynamic import error");
-      localStorage.setItem("vuetify:dynamic-reload", "true");
-      location.assign(to.fullPath);
-    } else {
-      console.error("Dynamic import error, reloading page did not fix it", err);
-    }
-  } else {
-    console.error(err);
-  }
-});
-
-router.isReady().then(() => {
-  localStorage.removeItem("vuetify:dynamic-reload");
-});
-
-const protectedRouteNames = ["dashboard", "profile"];
 
 router.beforeEach((to, from) => {
-  const user = useUserStore();
-  const isAuthenticated = user.isLoggedIn;
+  const auth = useAuthStore();
 
-  if (protectedRouteNames.includes(to.name as string) && !isAuthenticated) {
-    return "/login"; // Redirige a login si no está autenticado
+  if (to.meta.requiresAuth && !auth.isAuthenticated) {
+    return { name: "login" };
+  } else if (!to.meta.requiresAuth && auth.isAuthenticated) {
+    return { name: "dashboard" };
   } else {
     return true;
   }
 });
-
 export default router;

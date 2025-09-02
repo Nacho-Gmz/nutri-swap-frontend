@@ -11,7 +11,7 @@ Página que permite realizar intercambios de porciones basándose en más que la
 Instalar dependencias:
 
 ```bash
-npm install
+npm run install
 ```
 
 ## Uso
@@ -20,10 +20,10 @@ Esta sección cubre como arrancar el servidor de desarrollo y construir el proye
 
 ### Starting the Development Server
 
-Para arranca el servidor de desarrollo, ejecutar el siguiente comando. El servidor estará disponible en [http://localhost:3000](http://localhost:3000):
+Para arranca el servidor de desarrollo, ejecutar el siguiente comando. El servidor estará disponible en [http://localhost:5173](http://localhost:5173):
 
 ```bash
-npm dev
+npm run dev
 ```
 
 ### Construir versión para producción
@@ -31,7 +31,7 @@ npm dev
 Para construir la versión para producción del proyecto, se usa:
 
 ```bash
-npm build
+npm run build
 ```
 
 Una vez que el proceso de construcción haya finalizado, la aplicación estará lista para el despliegue en un entorno de producción.
@@ -47,4 +47,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

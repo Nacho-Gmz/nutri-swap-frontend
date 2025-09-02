@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@layer utilities {
+  /* Base glow text */
+  .glow {
+    /* Default variables */
+    --glow-start: theme("colors.pink.600");
+    --glow-end: theme("colors.pink.400");
+    --text-color: theme("colors.white");
+    color: var(--text-color);
+
+    /* Subtle static glow */
+    text-shadow:
+      0 0 4px #fff,
+      0 0 8px var(--glow-start),
+      0 0 12px var(--glow-start);
+  }
+
+  /* Hover pulse animation */
+  @keyframes glow {
+    from {
+      text-shadow:
+        0 0 4px #fff,
+        0 0 8px var(--glow-start),
+        0 0 12px var(--glow-start);
+    }
+    to {
+      text-shadow:
+        0 0 8px #fff,
+        0 0 12px var(--glow-end),
+        0 0 16px var(--glow-end);
+    }
+  }
+
+  .glow:hover {
+    animation: glow 1s ease-in-out infinite alternate;
+  }
+
+  /* Glow color utilities */
+  .glow-pink {
+    --glow-start: theme("colors.pink.600");
+    --glow-end: theme("colors.pink.400");
+  }
+  .glow-purple {
+    --glow-start: theme("colors.purple.600");
+    --glow-end: theme("colors.purple.400");
+  }
+  .glow-cyan {
+    --glow-start: theme("colors.cyan.600");
+    --glow-end: theme("colors.cyan.400");
+  }
+  .glow-green {
+    --glow-start: theme("colors.green.600");
+    --glow-end: theme("colors.green.400");
+  }
+
+  /* Text color utilities */
+  .text-white {
+    --text-color: theme("colors.white");
+  }
+  .text-black {
+    --text-color: theme("colors.black");
+  }
+  .text-pink {
+    --text-color: theme("colors.pink.500");
+  }
+  .text-cyan {
+    --text-color: theme("colors.cyan.400");
+  }
+  .text-purple {
+    --text-color: theme("colors.purple.500");
+  }
+  .text-green {
+    --text-color: theme("colors.green.500");
+  }
+}
+
+@theme {
+  --font-*: initial;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+}
+
+body {
+  @apply font-space-grotesk relative z-1 bg-emerald-200 font-normal dark:bg-emerald-800;
+  background-image: url("./images/food-pattern-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.input {
+  @apply h-11 w-full rounded-lg border border-gray-300/50 bg-white/30 px-4 py-2.5 text-sm text-gray-800 shadow-md placeholder:text-gray-700/50 focus:border-sky-300 focus:ring-3 focus:ring-sky-500/10 focus:outline-hidden dark:bg-black/30 dark:text-white/90 dark:placeholder:text-white/50;
+}
+
+.combobox {
+  @apply h-11 w-full rounded-lg border border-gray-300/50 bg-white/30 px-4 py-2.5 text-sm text-gray-800 shadow-md placeholder:text-gray-700/50 focus:border-sky-300 focus:ring-3 focus:ring-sky-500/10 focus:outline-hidden dark:bg-black/30 dark:text-white/90 dark:placeholder:text-white/50;
+}
+
+.label {
+  @apply mb-1.5 block text-lg font-medium text-gray-800 dark:text-white/90;
+}
+
+.button {
+  @apply items-center justify-center rounded-lg bg-sky-500 px-4 py-3 font-medium text-white/90 shadow-md transition duration-500 ease-in-out hover:bg-sky-600;
+}
+
+.link {
+  @apply font-bold text-sky-600 hover:text-sky-800 hover:underline dark:text-sky-300 dark:hover:text-sky-400;
+}
+
+.router-link-exact-active {
+  @apply scale-x-110 scale-y-115 bg-sky-400 dark:bg-sky-400 dark:text-sky-100;
+}
