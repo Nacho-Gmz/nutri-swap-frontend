@@ -21,7 +21,7 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
 <template>
   <div class="rounded-2xl p-4">
     <h3 class="glow glow-cyan text-2xl font-semibold">{{ intercambio.alimento.name }}</h3>
-    <ul>
+    <ul class="text-black dark:text-white">
       <li>
         <strong>Cantidad:</strong> {{ intercambio.alimento.quantity }}
         {{ intercambio.alimento.unit }}

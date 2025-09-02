@@ -18,8 +18,9 @@ const isApplicationMenuOpen = ref(false);
           <h1 class="glow glow-cyan block text-4xl font-bold">NutriSwap +</h1>
         </div>
         <div class="flex grow gap-2">
-          <router-link class="button" to="/dashboard">Tablero</router-link>
-          <router-link class="button" to="/user-swapper">Intercambios</router-link>
+          <router-link class="button" :to="{ name: 'dashboard' }">Intercambios</router-link>
+          <router-link class="button" :to="{ name: 'user-swapper' }">NutriSwap</router-link>
+          <router-link class="button" :to="{ name: 'user-about-us' }">Información</router-link>
         </div>
       </div>
 

@@ -28,13 +28,19 @@ const router = createRouter({
         {
           path: "",
           name: "dashboard",
-          component: () => import("@/modules/dashboard/pages/HomePage.vue"),
+          component: () => import("@/modules/dashboard/pages/DashboardPage.vue"),
           meta: { requiresAuth: true },
         },
         {
-          path: "/user-swapper",
-          name: "user swapper",
+          path: "user-swapper",
+          name: "user-swapper",
           component: () => import("@/modules/dashboard/pages/UserSwapPage.vue"),
+          meta: { requiresAuth: true },
+        },
+        {
+          path: "/user-about-us",
+          name: "user-about-us",
+          component: () => import("@/modules/dashboard/pages/InformationPage.vue"),
           meta: { requiresAuth: true },
         },
       ],

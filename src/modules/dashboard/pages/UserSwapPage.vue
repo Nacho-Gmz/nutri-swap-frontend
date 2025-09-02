@@ -36,18 +36,15 @@ const handleSwap = async () => {
   possibleSwaps.value = swapFoodResponse.swaps;
 };
 
-// Handler for swap action from FoodCarrousel
-const authStore = useAuthStore();
+const auth = useAuthStore();
 const handleMakeSwap = async (swappedFoodId: number) => {
-  if (!authStore.user || !selectedFoodId.value || !swappedFoodId) {
+  if (!auth.user || !selectedFoodId.value || !swappedFoodId) {
     useToasts().showToast("Faltan datos para registrar el intercambio", "error", 3000);
     return;
   }
   // Ensure userId is a number if needed
   const userId =
-    typeof authStore.user.userId === "string"
-      ? parseInt(authStore.user.userId, 10)
-      : authStore.user.userId;
+    typeof auth.user.userId === "string" ? parseInt(auth.user.userId, 10) : auth.user.userId;
   const res = await makeSwapAction(userId, {
     original_food_id: selectedFoodId.value,
     swapped_food_id: Number(swappedFoodId),
@@ -64,8 +61,9 @@ const handleMakeSwap = async (swappedFoodId: number) => {
   <div class="flex h-full max-h-full max-w-340 flex-col gap-2 overflow-visible">
     <simple-card class="flex w-full flex-col gap-2">
       <div class="flex w-full flex-col items-center justify-center gap-2">
-        <h1 class="w-full grow text-green-600 dark:text-green-400">
-          Bienvenido [Usuario], ¿listo para intercambiar?
+        <h1 class="w-full grow text-2xl font-bold text-green-700 dark:text-green-300">
+          Bienvenido <span class="text-sky-700 dark:text-sky-300"> {{ auth.user.email }} </span>,
+          ¿listo para intercambiar?
         </h1>
         <div class="flex w-full flex-col items-center justify-center gap-2 md:flex-row">
           <food-combobox class="w-full grow" @select="handleFoodSelect" />
@@ -82,7 +80,7 @@ const handleMakeSwap = async (swappedFoodId: number) => {
       </div>
       <div v-if="selectedFoodInfo && possibleSwaps" class="flex w-full gap-2">
         <div class="w-1/2 items-center justify-center p-4 px-12">
-          <FoodCard
+          <food-card
             v-if="selectedFoodInfo"
             :intercambio="{ alimento: selectedFoodInfo, similitud: 100 }"
             :compare-with="null"
@@ -90,7 +88,7 @@ const handleMakeSwap = async (swappedFoodId: number) => {
         </div>
 
         <div v-if="possibleSwaps" class="w-1/2 items-center justify-center">
-          <FoodCarrousel
+          <food-carrousel
             :intercambios="possibleSwaps"
             :compare-with="selectedFoodInfo"
             :action="(swap) => handleMakeSwap(swap.alimento.id)"

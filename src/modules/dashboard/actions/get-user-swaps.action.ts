@@ -1,23 +1,13 @@
 import { isAxiosError } from "axios";
 
 import { nutriSwapAPI } from "@/api/nutriSwapAPI";
-import type { UserSwap } from "../types";
-
-interface GetUserSwapsError {
-  ok: false;
-  message: string;
-}
-
-interface GetUserSwapsSuccess {
-  ok: true;
-  userSwaps: UserSwap[];
-}
+import type { GetUserSwapsError, GetUserSwapsSuccess, Swap } from "../types";
 
 export const getUserSwapsAction = async (
   user_id: number,
 ): Promise<GetUserSwapsError | GetUserSwapsSuccess> => {
   try {
-    const { data } = await nutriSwapAPI.get(`/intercambios/${user_id}`);
+    const { data } = await nutriSwapAPI.get<Swap[]>(`/intercambios/${user_id}`);
     return {
       ok: true,
       userSwaps: data,
