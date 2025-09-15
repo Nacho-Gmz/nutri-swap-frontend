@@ -28,5 +28,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Exponemos el puerto 8080 (NGINX por defecto corre en 80, pero OpenShift prefiere puertos más altos)
 EXPOSE 8080
 
+RUN chmod -R g+w /var/cache/nginx
+
 # Comando para iniciar NGINX
 CMD ["nginx", "-g", "daemon off;"]
