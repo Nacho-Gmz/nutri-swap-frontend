@@ -13,7 +13,7 @@ ARG VITE_ACCESS_TOKEN_KEY
 ENV VITE_API_URL=$VITE_API_URL
 ENV VITE_ACCESS_TOKEN_KEY=$VITE_ACCESS_TOKEN_KEY
 
-RUN npm run build
+RUN npm run build-only
 
 # --- Etapa de Servicio (Serve Stage) ---
 # Usamos una imagen ligera de NGINX para servir los archivos estáticos
