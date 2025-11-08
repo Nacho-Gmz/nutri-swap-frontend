@@ -6,7 +6,7 @@ import DashboardHeader from "../components/DashboardHeader.vue";
   <div class="min-h-screen xl:flex">
     <div class="flex-1 transition-all duration-300 ease-in-out">
       <DashboardHeader />
-      <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-6">
+      <div class="mx-auto max-w-(--breakpoint-2xl) p-4 md:p-2">
         <RouterView />
       </div>
     </div>

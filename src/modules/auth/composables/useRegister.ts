@@ -16,6 +16,21 @@ export const useRegister = () => {
     showPassword.value = !showPassword.value;
   };
 
+  const downloadFile = (fileName: string) => {
+    // public folder assets are served from the root
+    const url = `/${fileName}`;
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const downloadTerms = () => downloadFile("TyC.pdf");
+
+  const downloadPrivacy = () => downloadFile("PdP.pdf");
+
   const onRegister = async () => {
     if (!firstName.value || !lastName.value || !email.value || !password.value) {
       showToast("Campos vacios", "warning");
@@ -64,5 +79,7 @@ export const useRegister = () => {
     agreeToTerms,
     togglePasswordVisibility,
     onRegister,
+    downloadTerms,
+    downloadPrivacy,
   };
 };

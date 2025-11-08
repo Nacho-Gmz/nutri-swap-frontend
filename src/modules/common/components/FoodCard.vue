@@ -26,29 +26,30 @@ function compareClass(key: "calories" | "lipids" | "protein" | "carbohydrates") 
         <strong>Cantidad:</strong> {{ intercambio.alimento.quantity }}
         {{ intercambio.alimento.unit }}
       </li>
-      <li><strong>Peso bruto:</strong> {{ intercambio.alimento.gross_weight }} g</li>
-      <li><strong>Peso neto:</strong> {{ intercambio.alimento.net_weight }} g</li>
+      <li><strong>Peso bruto: </strong> {{ intercambio.alimento.gross_weight }} g</li>
+      <li><strong>Peso neto: </strong> {{ intercambio.alimento.net_weight }} g</li>
       <li>
-        <strong>Calorías:</strong>
+        <strong>Calorías: </strong>
         <span :class="compareClass('calories')">{{ intercambio.alimento.calories }} kcal</span>
       </li>
       <li>
-        <strong>Lípidos:</strong>
+        <strong>Lípidos: </strong>
         <span :class="compareClass('lipids')">{{ intercambio.alimento.lipids }} g</span>
       </li>
       <li>
-        <strong>Proteínas:</strong>
+        <strong>Proteínas: </strong>
         <span :class="compareClass('protein')">{{ intercambio.alimento.protein }} g</span>
       </li>
       <li>
-        <strong>Carbohidratos:</strong>
+        <strong>Carbohidratos: </strong>
         <span :class="compareClass('carbohydrates')"
           >{{ intercambio.alimento.carbohydrates }} g</span
         >
       </li>
 
       <li v-if="compareWith">
-        <strong>Similitud:</strong> {{ intercambio.similitud.toFixed(2) }} %
+        <strong>Similitud: </strong>
+        <span class="glow glow-green">{{ intercambio.similitud.toFixed(2) }} %</span>
       </li>
     </ul>
     <div class="flex items-center justify-center">

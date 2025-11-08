@@ -39,8 +39,9 @@ import SimpleCard from "@/modules/common/components/SimpleCard.vue";
         <li class="flex items-center gap-2 px-3 py-1">
           <span class="ml-2 block h-1.5 w-1.5 rounded-full bg-gray-700 dark:bg-white"></span>
           <span>
-            Agradecemos el apoyo del licenciado en Nutrición
+            Agradecemos el apoyo de los licenciados en Nutrición
             <b class="text-green-600 dark:text-green-400">Duilio Yael Bernal Quintana </b>
+            <b class="text-green-600 dark:text-green-400">Verónica Valeria Gutiérrez Coronado </b>
             <span class="text-red-500">&hearts;</span>
           </span>
         </li>

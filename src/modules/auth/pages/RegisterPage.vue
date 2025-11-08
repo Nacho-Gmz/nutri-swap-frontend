@@ -11,6 +11,8 @@ const {
   showPassword,
   togglePasswordVisibility,
   onRegister,
+  downloadPrivacy,
+  downloadTerms,
 } = useRegister();
 </script>
 
@@ -129,9 +131,11 @@ const {
                   </div>
                   <p class="inline-block font-normal text-gray-800 dark:text-white/90">
                     Al registrate, aceptas los
-                    <span class="link"> Términos y condiciones de servicio, </span>
+                    <span class="link" @click.stop="downloadTerms">
+                      Términos y condiciones de servicio,
+                    </span>
                     y nuestra
-                    <span class="link"> Política de privacidad </span>
+                    <span class="link" @click.stop="downloadPrivacy"> Política de privacidad </span>
                   </p>
                 </label>
               </div>
