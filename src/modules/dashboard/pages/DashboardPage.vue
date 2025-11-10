@@ -56,7 +56,13 @@ function openSwapDetail(originalId: number, swappedId: number) {
 <template>
   <div>
     <div v-if="loading">Cargando...</div>
-    <div v-else-if="error">{{ error }}</div>
+    <div v-else-if="error">
+      <simple-card>
+        <h1 class="text-2xl font-bold text-green-700 dark:text-green-300">
+          {{ error }}
+        </h1>
+      </simple-card>
+    </div>
     <div v-else>
       <simple-card>
         <h1 class="text-2xl font-bold text-green-700 dark:text-green-300">Mis intercambios</h1>
