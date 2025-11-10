@@ -15,7 +15,21 @@ export const useAuthStore = defineStore("auth", () => {
     userId: NaN,
   });
 
-  const isAuthenticated = computed(() => !!accessToken.value);
+  const isTokenExpired = computed(() => {
+    const token = accessToken.value;
+    if (!token) return true;
+    try {
+      const decoded = jwtDecode<LoginJwtPayload>(token);
+      const exp = (decoded as unknown as { exp?: number }).exp;
+      if (!exp) return true;
+      const nowSec = Math.floor(Date.now() / 1000);
+      return nowSec >= exp;
+    } catch {
+      return true;
+    }
+  });
+
+  const isAuthenticated = computed(() => !!accessToken.value && !isTokenExpired.value);
 
   const login = (token: string) => {
     const decodedToken = jwtDecode<LoginJwtPayload>(token);
@@ -36,6 +50,7 @@ export const useAuthStore = defineStore("auth", () => {
     isAuthenticated,
     accessToken,
     user,
+    isTokenExpired,
     login,
     refreshToken,
     logout,

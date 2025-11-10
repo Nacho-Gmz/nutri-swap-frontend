@@ -103,14 +103,6 @@ function openSwapDetail(originalId: number, swappedId: number) {
                         <i class="bx bx-info-circle text-2xl"></i>
                       </div>
                     </button>
-                    <button
-                      class="rounded-xl bg-red-400 p-2 duration-300 ease-in-out hover:scale-115"
-                      @click="openSwapDetail(swap.original_food.id, swap.swapped_food.id)"
-                    >
-                      <div class="flex items-center justify-center">
-                        <i class="bx bx-trash text-2xl"></i>
-                      </div>
-                    </button>
                   </div>
                 </td>
               </tr>

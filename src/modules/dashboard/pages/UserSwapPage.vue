@@ -78,8 +78,8 @@ const handleMakeSwap = async (swappedFoodId: number) => {
           </div>
         </div>
       </div>
-      <div v-if="selectedFoodInfo && possibleSwaps" class="flex w-full gap-2">
-        <div class="w-1/2 items-center justify-center p-4 px-12">
+      <div v-if="selectedFoodInfo && possibleSwaps" class="flex w-full flex-col gap-2 md:flex-row">
+        <div class="w-full items-center justify-center p-4 px-12 md:w-1/2">
           <food-card
             v-if="selectedFoodInfo"
             :intercambio="{ alimento: selectedFoodInfo, similitud: 100 }"
@@ -87,7 +87,10 @@ const handleMakeSwap = async (swappedFoodId: number) => {
           />
         </div>
 
-        <div v-if="possibleSwaps" class="w-1/2 items-center justify-center">
+        <div
+          v-if="possibleSwaps"
+          class="w-full items-center justify-center border-t-2 border-green-800 md:w-1/2 md:border-0 dark:border-green-200"
+        >
           <food-carrousel
             :intercambios="possibleSwaps"
             :compare-with="selectedFoodInfo"

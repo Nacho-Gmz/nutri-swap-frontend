@@ -45,7 +45,7 @@ onUnmounted(() => {
 <template>
   <div class="relative" ref="dropdownRef">
     <button
-      class="flex items-center rounded-2xl border border-green-200 bg-white/50 p-5 text-green-600 backdrop-blur-3xl dark:border-green-600/30 dark:bg-gray-900/10 dark:text-green-400"
+      class="flex items-center rounded-2xl p-5 text-green-600 md:border md:border-green-200 md:bg-white/50 md:backdrop-blur-3xl dark:text-green-400 md:dark:border-green-600/30 md:dark:bg-green-900"
       @click.prevent="toggleDropdown"
     >
       <span class="text-md mr-1 block font-medium">{{ user?.email }}</span>
@@ -56,7 +56,7 @@ onUnmounted(() => {
     <!-- Dropdown Start -->
     <div
       v-if="dropdownOpen"
-      class="absolute right-0 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-green-200 bg-white/50 p-3 shadow-lg backdrop-blur-3xl dark:border-green-800 dark:bg-gray-900/10"
+      class="absolute right-0 z-999 mt-[17px] flex w-[260px] flex-col rounded-2xl border border-green-200 bg-white p-3 shadow-lg backdrop-blur-3xl dark:border-green-800 dark:bg-green-900"
     >
       <div class="text-green-600 dark:text-green-400">
         {{ user?.email }}

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="show"
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
+    class="fixed inset-0 z-99999 flex items-center justify-center bg-black/40 p-2 backdrop-blur-sm"
   >
     <div
       class="relative w-full max-w-2xl rounded-2xl border border-green-200 bg-white/60 p-6 shadow-2xl backdrop-blur-2xl transition-all duration-300 dark:border-green-700 dark:bg-green-900/10"
